@@ -92,6 +92,11 @@
           "repository_urls"
         ]
       }
+    },
+    {
+      "rds": {
+        "target": "target"
+      }
     }
   ]
 }

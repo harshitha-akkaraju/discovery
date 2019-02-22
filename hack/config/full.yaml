@@ -54,3 +54,5 @@ accounts:
 - static:
     repositoryUrls:
     - "repository_urls"
+- rds:
+    target: "target"

@@ -79,8 +79,13 @@ func testStatic(t *testing.T, static *config.Static) {
 	require.Contains(t, static.RepositoryUrls, "repository_urls")
 }
 
+func testRds(t *testing.T, rds *config.Rds) {
+	require.NotNil(t, rds)
+	require.Equal(t, rds.Target, "target")
+}
+
 func testCommon(t *testing.T, cfg *config.Configuration) {
-	require.Len(t, cfg.Accounts, 9)
+	require.Len(t, cfg.Accounts, 10)
 
 	{
 		generic := cfg.Accounts[0].GetGeneric()
@@ -118,20 +123,22 @@ func testCommon(t *testing.T, cfg *config.Configuration) {
 
 	{
 		bitbucket := cfg.Accounts[6].GetBitbucket()
-		require.NotNil(t, bitbucket)
 		testBasic(t, bitbucket.Basic)
 	}
 
 	{
 		bitbucket := cfg.Accounts[7].GetBitbucket()
-		require.NotNil(t, bitbucket)
 		testOauth(t, bitbucket.Oauth)
 	}
 
 	{
 		static := cfg.Accounts[8].GetStatic()
-		require.NotNil(t, static)
 		testStatic(t, static)
+	}
+
+	{
+		rds := cfg.Accounts[9].GetRds()
+		testRds(t, rds);
 	}
 }
 

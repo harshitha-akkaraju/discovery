@@ -105,3 +105,8 @@ accounts {
         repository_urls: "repository_urls"
     }
 }
+accounts {
+    rds {
+        target: "target"
+    }
+}
