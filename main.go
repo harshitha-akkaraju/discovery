@@ -18,7 +18,7 @@ func main() {
 	port := 8090
 
 	cmd := &cobra.Command{
-		Use: "rds",
+		Use:   "rds",
 		Short: "rds runs the repository discovery service.",
 		Run: func(cmd *cobra.Command, args []string) {
 			address := fmt.Sprintf(":%d", port)

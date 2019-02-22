@@ -6,14 +6,14 @@ import "sync"
 func NewRepositoryStore() *RepositoryStore {
 	return &RepositoryStore{
 		repositories: make(map[string]bool),
-		lock: &sync.Mutex{},
+		lock:         &sync.Mutex{},
 	}
 }
 
 // RepositoryStore defines a locked structure for easy sharing across goroutine bounds.
 type RepositoryStore struct {
 	repositories map[string]bool
-	lock *sync.Mutex
+	lock         *sync.Mutex
 }
 
 // Insert appends new entires to the internal storage structure.

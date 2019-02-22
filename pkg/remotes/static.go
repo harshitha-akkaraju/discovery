@@ -2,7 +2,6 @@ package remotes
 
 import "github.com/mjpitz/rds/pkg/config"
 
-
 var _ Remote = &staticRemote{}
 
 // NewStaticRemote produces a new remote from static configuration
