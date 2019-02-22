@@ -1,0 +1,97 @@
+{
+  "accounts": [
+    {
+      "generic": {
+        "baseUrl": "base_url",
+        "path": "path",
+        "pageParameter": "page_parameter",
+        "perPageParameter": "per_page_parameter",
+        "pageSize": 20,
+        "selector": "selector"
+      }
+    },
+    {
+      "generic": {
+        "baseUrl": "base_url",
+        "path": "path",
+        "pageParameter": "page_parameter",
+        "perPageParameter": "per_page_parameter",
+        "pageSize": 20,
+        "selector": "selector",
+        "basic": {
+          "password": "password",
+          "username": "username"
+        }
+      }
+    },
+    {
+      "gitlab": {
+        "baseUrl": "base_url",
+        "private": {
+          "token": "token"
+        }
+      }
+    },
+    {
+      "gitlab": {
+        "baseUrl": "base_url",
+        "oauth": {
+          "token": "token"
+        }
+      }
+    },
+    {
+      "github": {
+        "baseUrl": "base_url",
+        "uploadUrl": "upload_url",
+        "organizations": [
+          "org1"
+        ],
+        "users": [
+          "user1"
+        ]
+      }
+    },
+    {
+      "github": {
+        "baseUrl": "base_url",
+        "uploadUrl": "upload_url",
+        "organizations": [
+          "org1"
+        ],
+        "users": [
+          "user1"
+        ],
+        "oauth2": {
+          "expiry": "expiry",
+          "refreshToken": "refresh_token",
+          "token": "token",
+          "tokenType": "token_type"
+        }
+      }
+    },
+    {
+      "bitbucket": {
+        "basic": {
+          "password": "password",
+          "username": "username"
+        }
+      }
+    },
+    {
+      "bitbucket": {
+        "oauth": {
+          "applicationId": "application_id",
+          "token": "token"
+        }
+      }
+    },
+    {
+      "static": {
+        "repositoryUrls": [
+          "repository_urls"
+        ]
+      }
+    }
+  ]
+}
