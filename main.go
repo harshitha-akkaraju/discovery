@@ -51,8 +51,8 @@ func main() {
 	}
 
 	flags := cmd.Flags()
-	flags.StringVar(&configPath, "config-file", configPath, "The path to the config file")
-	flags.IntVar(&port, "port", 8090, "The port to run on")
+	flags.StringVar(&configPath, "config", configPath, "The path to the config file")
+	flags.IntVar(&port, "port", port, "The port to run on")
 
 	if err := cmd.Execute(); err != nil {
 		panic(err)
