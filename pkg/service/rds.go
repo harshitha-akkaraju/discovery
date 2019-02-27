@@ -1,12 +1,13 @@
 package service
 
 import (
+	"time"
+
 	"github.com/mjpitz/rds/api"
 	"github.com/mjpitz/rds/pkg/remotes"
 	"github.com/mjpitz/rds/pkg/service/store"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
-	"time"
 )
 
 func load(remote remotes.Remote, repositoryStore *store.RepositoryStore) {
@@ -25,7 +26,7 @@ func NewServer(remote remotes.Remote) api.RepositoryDiscoveryServiceServer {
 
 	go func() {
 		load(remote, repositoryStore)
-		for range time.Tick(1 * time.Minute) {
+		for range time.Tick(30 * time.Minute) {
 			load(remote, repositoryStore)
 		}
 	}()
