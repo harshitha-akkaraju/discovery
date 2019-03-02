@@ -9,6 +9,8 @@ It was named similarly to Envoy's XDS implementation which acts as an aggregate 
 
 [![Build Status](https://travis-ci.com/mjpitz/rds.svg?branch=master)](https://travis-ci.com/mjpitz/rds)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mjpitz/rds)](https://goreportcard.com/report/github.com/mjpitz/rds)
+[![](https://images.microbadger.com/badges/image/mjpitz/rds.svg)](https://microbadger.com/images/mjpitz/rds)
+[![](https://images.microbadger.com/badges/version/mjpitz/rds.svg)](https://microbadger.com/images/mjpitz/rds)
 
 ## Getting Started
 
