@@ -22,7 +22,7 @@ func ParseConfig(configuration *config.Configuration) (Remote, error) {
 		} else if github := account.GetGithub(); github != nil {
 			remote, err = NewGithubRemote(github)
 		} else if gitlab := account.GetGitlab(); gitlab != nil {
-			err = fmt.Errorf("upsupported: gitlab")
+			remote, err = NewGitlabRemote(gitlab)
 		} else if static := account.GetStatic(); static != nil {
 			remote = NewStaticRemote(static)
 		} else if rds := account.GetRds(); rds != nil {

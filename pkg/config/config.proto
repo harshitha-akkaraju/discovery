@@ -35,6 +35,9 @@ message Github {
 message Gitlab {
     google.protobuf.StringValue base_url = 1;
 
+    repeated string users = 3;
+    repeated string groups = 4;
+
     OAuthToken private = 10;
     OAuthToken oauth = 11;
 }
