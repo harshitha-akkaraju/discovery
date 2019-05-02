@@ -7,6 +7,8 @@ import (
 	"github.com/xanzy/go-gitlab"
 )
 
+// NewGitlabRemote constructs a new remote implementation that speaks with Gitlab
+// for repository related information.
 func NewGitlabRemote(cfg *config.Gitlab) (Remote, error) {
 	var client *gitlab.Client
 
@@ -89,7 +91,7 @@ func (r *gitlabRemote) ListRepositories() ([]string, error) {
 		}
 	}
 
-	for group, _ := range groups {
+	for group := range groups {
 		logrus.Infof("[remotes.gitlab] fetching projects for group %s", group)
 
 		page = 1
