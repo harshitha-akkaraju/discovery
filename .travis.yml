@@ -30,6 +30,7 @@ deploy:
     - bin/rds_linux_386
     - bin/rds_linux_amd64
     - bin/rds_linux_arm
+    - bin/rds_linux_arm64
     - bin/rds_windows_386.exe
     - bin/rds_windows_amd64.exe
   on:
