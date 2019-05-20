@@ -67,7 +67,7 @@ func (r *gitlabRemote) ListRepositories() ([]string, error) {
 	}
 
 	for _, user := range r.config.Users {
-		logrus.Infof("[remotes.gitlab] fetching projects for user %s", user)
+		logrus.Infof("[remotes.gitlab] fetching projects for user: %s", user)
 
 		page = 1
 		for ; page > 0; {
@@ -92,7 +92,7 @@ func (r *gitlabRemote) ListRepositories() ([]string, error) {
 	}
 
 	for group := range groups {
-		logrus.Infof("[remotes.gitlab] fetching projects for group %s", group)
+		logrus.Infof("[remotes.gitlab] fetching projects for group: %s", group)
 
 		page = 1
 		for ; page > 0; {

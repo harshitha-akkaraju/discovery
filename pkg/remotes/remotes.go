@@ -18,7 +18,7 @@ func ParseConfig(configuration *config.Configuration) (Remote, error) {
 		if generic := account.GetGeneric(); generic != nil {
 			remote = NewGenericRemote(generic)
 		} else if bitbucket := account.GetBitbucket(); bitbucket != nil {
-			err = fmt.Errorf("upsupported: bitbucket")
+			remote, err = NewBitbucketRemote(bitbucket)
 		} else if github := account.GetGithub(); github != nil {
 			remote, err = NewGithubRemote(github)
 		} else if gitlab := account.GetGitlab(); gitlab != nil {

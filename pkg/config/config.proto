@@ -43,6 +43,9 @@ message Gitlab {
 }
 
 message Bitbucket {
+    repeated string users = 3;
+    repeated string teams = 4;
+
     Basic basic = 10;
     OAuthToken oauth = 11;
 }
