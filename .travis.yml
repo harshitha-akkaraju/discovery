@@ -34,5 +34,5 @@ deploy:
     - bin/rds_windows_386.exe
     - bin/rds_windows_amd64.exe
   on:
-    repo: mjpitz/rds
+    repo: deps-cloud/rds
     tags: true

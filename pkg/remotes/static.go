@@ -1,6 +1,6 @@
 package remotes
 
-import "github.com/mjpitz/rds/pkg/config"
+import "github.com/deps-cloud/rds/pkg/config"
 
 var _ Remote = &staticRemote{}
 

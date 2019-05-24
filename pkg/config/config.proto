@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package mjpitz.rds.config;
+package cloud.deps.rds.config;
 
 import "github.com/golang/protobuf/ptypes/wrappers/wrappers.proto";
 

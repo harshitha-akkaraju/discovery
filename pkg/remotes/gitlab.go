@@ -2,7 +2,8 @@ package remotes
 
 import (
 	"fmt"
-	"github.com/mjpitz/rds/pkg/config"
+
+	"github.com/deps-cloud/rds/pkg/config"
 	"github.com/sirupsen/logrus"
 	"github.com/xanzy/go-gitlab"
 )

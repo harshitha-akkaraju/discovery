@@ -2,15 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/mjpitz/rds/api"
-	"github.com/mjpitz/rds/pkg/config"
-	"github.com/mjpitz/rds/pkg/remotes"
-	"github.com/mjpitz/rds/pkg/service"
+	"net"
+	"os"
+
+	"github.com/deps-cloud/rds/api"
+	"github.com/deps-cloud/rds/pkg/config"
+	"github.com/deps-cloud/rds/pkg/remotes"
+	"github.com/deps-cloud/rds/pkg/service"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
-	"net"
-	"os"
 )
 
 func main() {

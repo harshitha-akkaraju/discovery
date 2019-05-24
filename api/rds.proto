@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package mjpitz.rds.api;
+package cloud.deps.rds.api;
 
 option go_package = "api";
 
 option java_multiple_files = true;
-option java_package = "com.mjpitz.rds.api";
+option java_package = "cloud.deps.rds.api";
 option java_outer_classname = "RDSProto";
 
 

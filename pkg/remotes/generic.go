@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/mjpitz/rds/pkg/config"
+	"github.com/deps-cloud/rds/pkg/config"
 	"github.com/nytlabs/gojee"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"

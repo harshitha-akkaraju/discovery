@@ -21,7 +21,7 @@ Getting started with RDS is really quick and easy.
 
 Releases for this project can be found here under github's releases integration.
 
-https://github.com/mjpitz/rds/releases
+https://github.com/deps-cloud/rds/releases
 
 ### Configuring rds
 
@@ -33,11 +33,24 @@ Below, I have provided a snippet on the configuration required for using github 
 ```yaml
 # cat ${HOME}/.rds/config.yml
 accounts:
-  - github:
-      oauth2:
-        token: <oauth_token>
-      users:
-      - <username>
+- github:
+    oauth2:
+      token: <oauth_token>
+    users:
+    - <username>
+- gitlab:
+    private:
+      token: <private_token>
+    users:
+    - <username>
+- bitbucket:
+    basic:
+      username: <username>
+      password: <app_password>
+    users:
+    - <username>
+    teams:
+    - <teamname>
 ```
 
 ### Running rds
@@ -45,11 +58,17 @@ accounts:
 Once you've set up the configuration, simply run `rds` to start the service.
 
 ```bash
-$ rds 
+$ rds
 INFO[0000] [main] starting gRPC on :8090                
 INFO[0000] [service.rds] loading repositories           
 INFO[0000] [remotes.github] processing organizations for user: mjpitz 
 INFO[0000] [remotes.github] processing repositories for user: mjpitz 
-INFO[0002] [remotes.github] processing repositories for organization: indeedeng 
-INFO[0003] [remotes.github] processing repositories for organization: indeedeng-alpha 
+INFO[0003] [remotes.github] processing repositories for organization: indeedeng 
+INFO[0005] [remotes.github] processing repositories for organization: indeedeng-alpha 
+INFO[0005] [remotes.github] processing repositories for organization: deps-cloud 
+INFO[0006] [remotes.gitlab] fetching groups
+INFO[0006] [remotes.gitlab] fetching projects for user: mjpitz 
+INFO[0006] [remotes.gitlab] fetching projects for group: group1
+INFO[0007] [remotes.bitbucket] fetching projects for user: mjpitz
+INFO[0008] [remotes.bitbucket] fetching projects for team: team1 
 ```

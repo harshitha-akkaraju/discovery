@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/deps-cloud/rds/pkg/config"
 	"github.com/google/go-github/v20/github"
-	"github.com/mjpitz/rds/pkg/config"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
 )

@@ -1,4 +1,4 @@
-module github.com/mjpitz/rds
+module github.com/deps-cloud/rds
 
 require (
 	github.com/davidji99/go-bitbucket v0.5.0

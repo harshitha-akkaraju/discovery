@@ -2,8 +2,9 @@ package remotes
 
 import (
 	"context"
-	"github.com/mjpitz/rds/api"
-	"github.com/mjpitz/rds/pkg/config"
+
+	"github.com/deps-cloud/rds/api"
+	"github.com/deps-cloud/rds/pkg/config"
 	"google.golang.org/grpc"
 )
 
