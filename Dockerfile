@@ -1,13 +1,7 @@
-FROM golang:1.11
+FROM depscloud/base:latest
 
-RUN go get golang.org/x/lint/golint
+ARG VERSION=0.0.6
 
-ENV GO111MODULE on
-
-WORKDIR /go/src/rds
-
-COPY . .
-
-RUN make deps && make test && make install
+RUN install-depscloud-binary rds ${VERSION}
 
 ENTRYPOINT [ "rds" ]

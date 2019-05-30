@@ -18,4 +18,9 @@ deploy:
 	GOOS=linux GOARCH=arm64 go build -o bin/rds_linux_arm64
 
 docker:
+	docker build -t depscloud/rds:latest -f Dockerfile.dev .
+
+dockerx:
+	docker buildx rm depscloud--rds || echo "depscloud--rds does not exist"
+	docker buildx create --name depscloud--rds --use
 	docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t depscloud/rds:latest .
