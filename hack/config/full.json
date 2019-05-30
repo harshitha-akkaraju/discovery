@@ -27,6 +27,7 @@
     {
       "gitlab": {
         "baseUrl": "base_url",
+        "strategy": "HTTP",
         "private": {
           "token": "token"
         }
@@ -35,6 +36,7 @@
     {
       "gitlab": {
         "baseUrl": "base_url",
+        "strategy": "HTTP",
         "oauth": {
           "token": "token"
         }
@@ -49,7 +51,8 @@
         ],
         "users": [
           "user1"
-        ]
+        ],
+        "strategy": "HTTP"
       }
     },
     {
@@ -62,6 +65,7 @@
         "users": [
           "user1"
         ],
+        "strategy": "HTTP",
         "oauth2": {
           "expiry": "expiry",
           "refreshToken": "refresh_token",
@@ -72,6 +76,13 @@
     },
     {
       "bitbucket": {
+        "teams": [
+          "team1"
+        ],
+        "users": [
+          "user1"
+        ],
+        "strategy": "HTTP",
         "basic": {
           "password": "password",
           "username": "username"
@@ -80,6 +91,13 @@
     },
     {
       "bitbucket": {
+        "teams": [
+          "team1"
+        ],
+        "users": [
+          "user1"
+        ],
+        "strategy": "HTTP",
         "oauth": {
           "applicationId": "application_id",
           "token": "token"

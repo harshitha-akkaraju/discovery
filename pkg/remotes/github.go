@@ -99,12 +99,17 @@ func (r *githubRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			repoUrls := make([]string, len(repos))
+			urls := make([]string, len(repos))
+
 			for i, repo := range repos {
-				repoUrls[i] = repo.GetSSHURL()
+				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
+					urls[i] = repo.GetCloneURL()
+				} else {
+					urls[i] = repo.GetSSHURL()
+				}
 			}
 
-			repositories = append(repositories, repoUrls...)
+			repositories = append(repositories, urls...)
 
 			repoPage = response.NextPage
 		}
@@ -125,12 +130,17 @@ func (r *githubRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			repoUrls := make([]string, len(orgRepos))
+			urls := make([]string, len(orgRepos))
+
 			for i, orgRepo := range orgRepos {
-				repoUrls[i] = orgRepo.GetSSHURL()
+				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
+					urls[i] = orgRepo.GetCloneURL()
+				} else {
+					urls[i] = orgRepo.GetSSHURL()
+				}
 			}
 
-			repositories = append(repositories, repoUrls...)
+			repositories = append(repositories, urls...)
 
 			orgRepoPage = response.NextPage
 		}

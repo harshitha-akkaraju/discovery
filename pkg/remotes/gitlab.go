@@ -84,9 +84,17 @@ func (r *gitlabRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			for _, project := range projects {
-				repositories = append(repositories, project.SSHURLToRepo)
+			urls := make([]string, len(projects))
+
+			for i, project := range projects {
+				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
+					urls[i] = project.HTTPURLToRepo
+				} else {
+					urls[i] = project.SSHURLToRepo
+				}
 			}
+
+			repositories = append(repositories, urls...)
 
 			page = resp.NextPage
 		}
@@ -109,9 +117,17 @@ func (r *gitlabRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			for _, project := range projects {
-				repositories = append(repositories, project.SSHURLToRepo)
+			urls := make([]string, len(projects))
+
+			for i, project := range projects {
+				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
+					urls[i] = project.HTTPURLToRepo
+				} else {
+					urls[i] = project.SSHURLToRepo
+				}
 			}
+
+			repositories = append(repositories, urls...)
 
 			page = resp.NextPage
 		}

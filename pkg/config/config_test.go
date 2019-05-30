@@ -53,6 +53,7 @@ func testGitlab(t *testing.T, gitlab *config.Gitlab) {
 	require.NotNil(t, gitlab.BaseUrl)
 
 	require.Equal(t, "base_url", gitlab.BaseUrl.Value)
+	require.Equal(t, config.CloneStrategy_HTTP, gitlab.Strategy)
 }
 
 func testGithub(t *testing.T, github *config.Github) {
@@ -70,6 +71,22 @@ func testGithub(t *testing.T, github *config.Github) {
 	require.NotNil(t, github.Users)
 	require.Len(t, github.Users, 1)
 	require.Contains(t, github.Users, "user1")
+
+	require.Equal(t, config.CloneStrategy_HTTP, github.Strategy)
+}
+
+func testBitbucket(t *testing.T, bitbucket *config.Bitbucket) {
+	require.NotNil(t, bitbucket)
+
+	require.NotNil(t, bitbucket.Teams)
+	require.Len(t, bitbucket.Teams, 1)
+	require.Contains(t, bitbucket.Teams, "team1")
+
+	require.NotNil(t, bitbucket.Users)
+	require.Len(t, bitbucket.Users, 1)
+	require.Contains(t, bitbucket.Users, "user1")
+
+	require.Equal(t, config.CloneStrategy_HTTP, bitbucket.Strategy)
 }
 
 func testStatic(t *testing.T, static *config.Static) {
@@ -123,11 +140,13 @@ func testCommon(t *testing.T, cfg *config.Configuration) {
 
 	{
 		bitbucket := cfg.Accounts[6].GetBitbucket()
+		testBitbucket(t, bitbucket)
 		testBasic(t, bitbucket.Basic)
 	}
 
 	{
 		bitbucket := cfg.Accounts[7].GetBitbucket()
+		testBitbucket(t, bitbucket)
 		testOauth(t, bitbucket.Oauth)
 	}
 

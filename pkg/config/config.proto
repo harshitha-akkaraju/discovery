@@ -6,6 +6,11 @@ import "github.com/golang/protobuf/ptypes/wrappers/wrappers.proto";
 
 option go_package="config";
 
+enum CloneStrategy {
+    SSH = 0;
+    HTTP = 1;
+}
+
 message Basic {
     string username = 1;
     google.protobuf.StringValue password = 2;
@@ -28,6 +33,7 @@ message Github {
     google.protobuf.StringValue upload_url = 2;
     repeated string users = 3;
     repeated string organizations = 4;
+    CloneStrategy strategy = 5;
 
     OAuth2Token oauth2 = 10;
 }
@@ -37,6 +43,7 @@ message Gitlab {
 
     repeated string users = 3;
     repeated string groups = 4;
+    CloneStrategy strategy = 5;
 
     OAuthToken private = 10;
     OAuthToken oauth = 11;
@@ -45,6 +52,7 @@ message Gitlab {
 message Bitbucket {
     repeated string users = 3;
     repeated string teams = 4;
+    CloneStrategy strategy = 5;
 
     Basic basic = 10;
     OAuthToken oauth = 11;

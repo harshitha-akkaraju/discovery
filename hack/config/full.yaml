@@ -18,10 +18,12 @@ accounts:
       password: "password"
 - gitlab:
     baseUrl: "base_url"
+    strategy: "HTTP"
     private:
       token: "token"
 - gitlab:
     baseUrl: "base_url"
+    strategy: "HTTP"
     oauth:
       token: "token"
 - github:
@@ -31,6 +33,7 @@ accounts:
     - org1
     users:
     - user1
+    strategy: "HTTP"
 - github:
     baseUrl: "base_url"
     uploadUrl: "upload_url"
@@ -38,16 +41,27 @@ accounts:
     - org1
     users:
     - user1
+    strategy: "HTTP"
     oauth2:
       token: "token"
       tokenType: "token_type"
       refreshToken: "refresh_token"
       expiry: "expiry"
 - bitbucket:
+    teams:
+    - team1
+    users:
+    - user1
+    strategy: "HTTP"
     basic:
       username: "username"
       password: "password"
 - bitbucket:
+    teams:
+    - team1
+    users:
+    - user1
+    strategy: "HTTP"
     oauth:
       token: "token"
       applicationId: "application_id"

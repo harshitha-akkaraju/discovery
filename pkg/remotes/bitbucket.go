@@ -33,7 +33,7 @@ func NewBitbucketRemote(cfg *config.Bitbucket) (Remote, error) {
 
 var _ Remote = &bitbucketRemote{}
 
-func convertRepositoriesResponse(response interface{}) []string {
+func convertRepositoriesResponse(response interface{}, strategy string) []string {
 	rdata := response.(map[string]interface{})
 	values := rdata["values"].([]interface{})
 
@@ -48,7 +48,7 @@ func convertRepositoriesResponse(response interface{}) []string {
 		for _, cloneURL := range cloneURLs {
 			curl := cloneURL.(map[string]interface{})
 
-			if curl["name"].(string) == "ssh" {
+			if curl["name"].(string) == strategy {
 				repos = append(repos, curl["href"].(string))
 			}
 		}
@@ -65,6 +65,11 @@ type bitbucketRemote struct {
 func (r *bitbucketRemote) ListRepositories() ([]string, error) {
 	pageLen := uint64(10)
 	allRepos := make([]string, 0)
+
+	strategy := "ssh"
+	if r.config.GetStrategy() == config.CloneStrategy_HTTP {
+		strategy = "https"
+	}
 
 	for _, user := range r.config.Users {
 		logrus.Infof("[remotes.bitbucket] fetching projects for user: %s", user)
@@ -84,7 +89,7 @@ func (r *bitbucketRemote) ListRepositories() ([]string, error) {
 				continue
 			}
 
-			rr := convertRepositoriesResponse(repos)
+			rr := convertRepositoriesResponse(repos, strategy)
 			allRepos = append(allRepos, rr...)
 
 			if uint64(len(rr)) < pageLen {
@@ -111,7 +116,7 @@ func (r *bitbucketRemote) ListRepositories() ([]string, error) {
 				continue
 			}
 
-			rr := convertRepositoriesResponse(repos)
+			rr := convertRepositoriesResponse(repos, strategy)
 			allRepos = append(allRepos, rr...)
 
 			if uint64(len(rr)) < pageLen {
