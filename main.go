@@ -42,7 +42,7 @@ func main() {
 			impl := service.NewServer(remote)
 
 			server := grpc.NewServer()
-			api.RegisterRepositoryDiscoveryServiceServer(server, impl)
+			api.RegisterRepositoryDiscoveryServer(server, impl)
 
 			logrus.Infof("[main] starting gRPC on %s", address)
 			if err := server.Serve(listener); err != nil {

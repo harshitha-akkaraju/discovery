@@ -15,6 +15,6 @@ message ListRepositoriesResponse {
     repeated string repositories = 1;
 }
 
-service RepositoryDiscoveryService {
+service RepositoryDiscovery {
     rpc List (ListRepositoriesRequest) returns (ListRepositoriesResponse);
 }

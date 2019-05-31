@@ -21,7 +21,7 @@ func load(remote remotes.Remote, repositoryStore *store.RepositoryStore) {
 }
 
 // NewServer creates an rds server using the specified remote
-func NewServer(remote remotes.Remote) api.RepositoryDiscoveryServiceServer {
+func NewServer(remote remotes.Remote) api.RepositoryDiscoveryServer {
 	repositoryStore := store.NewRepositoryStore()
 
 	go func() {
@@ -36,7 +36,7 @@ func NewServer(remote remotes.Remote) api.RepositoryDiscoveryServiceServer {
 	}
 }
 
-var _ api.RepositoryDiscoveryServiceServer = &repositoryDiscoveryService{}
+var _ api.RepositoryDiscoveryServer = &repositoryDiscoveryService{}
 
 type repositoryDiscoveryService struct {
 	repositoryStore *store.RepositoryStore

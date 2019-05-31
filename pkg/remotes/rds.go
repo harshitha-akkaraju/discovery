@@ -22,12 +22,12 @@ func NewRDSRemote(config *config.Rds) (Remote, error) {
 	}
 
 	return &rdsRemote{
-		client: api.NewRepositoryDiscoveryServiceClient(cc),
+		client: api.NewRepositoryDiscoveryClient(cc),
 	}, nil
 }
 
 type rdsRemote struct {
-	client api.RepositoryDiscoveryServiceClient
+	client api.RepositoryDiscoveryClient
 }
 
 func (r *rdsRemote) ListRepositories() ([]string, error) {
