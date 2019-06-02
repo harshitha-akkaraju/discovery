@@ -3,10 +3,12 @@
 
 package config
 
-import proto "github.com/gogo/protobuf/proto"
-import fmt "fmt"
-import math "math"
-import wrappers "github.com/golang/protobuf/ptypes/wrappers"
+import (
+	fmt "fmt"
+	proto "github.com/gogo/protobuf/proto"
+	wrappers "github.com/golang/protobuf/ptypes/wrappers"
+	math "math"
+)
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -30,6 +32,7 @@ var CloneStrategy_name = map[int32]string{
 	0: "SSH",
 	1: "HTTP",
 }
+
 var CloneStrategy_value = map[string]int32{
 	"SSH":  0,
 	"HTTP": 1,
@@ -38,8 +41,9 @@ var CloneStrategy_value = map[string]int32{
 func (x CloneStrategy) String() string {
 	return proto.EnumName(CloneStrategy_name, int32(x))
 }
+
 func (CloneStrategy) EnumDescriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{0}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{0}
 }
 
 type Basic struct {
@@ -54,7 +58,7 @@ func (m *Basic) Reset()         { *m = Basic{} }
 func (m *Basic) String() string { return proto.CompactTextString(m) }
 func (*Basic) ProtoMessage()    {}
 func (*Basic) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{0}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{0}
 }
 func (m *Basic) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Basic.Unmarshal(m, b)
@@ -62,8 +66,8 @@ func (m *Basic) XXX_Unmarshal(b []byte) error {
 func (m *Basic) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Basic.Marshal(b, m, deterministic)
 }
-func (dst *Basic) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Basic.Merge(dst, src)
+func (m *Basic) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Basic.Merge(m, src)
 }
 func (m *Basic) XXX_Size() int {
 	return xxx_messageInfo_Basic.Size(m)
@@ -100,7 +104,7 @@ func (m *OAuthToken) Reset()         { *m = OAuthToken{} }
 func (m *OAuthToken) String() string { return proto.CompactTextString(m) }
 func (*OAuthToken) ProtoMessage()    {}
 func (*OAuthToken) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{1}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{1}
 }
 func (m *OAuthToken) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OAuthToken.Unmarshal(m, b)
@@ -108,8 +112,8 @@ func (m *OAuthToken) XXX_Unmarshal(b []byte) error {
 func (m *OAuthToken) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OAuthToken.Marshal(b, m, deterministic)
 }
-func (dst *OAuthToken) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OAuthToken.Merge(dst, src)
+func (m *OAuthToken) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OAuthToken.Merge(m, src)
 }
 func (m *OAuthToken) XXX_Size() int {
 	return xxx_messageInfo_OAuthToken.Size(m)
@@ -148,7 +152,7 @@ func (m *OAuth2Token) Reset()         { *m = OAuth2Token{} }
 func (m *OAuth2Token) String() string { return proto.CompactTextString(m) }
 func (*OAuth2Token) ProtoMessage()    {}
 func (*OAuth2Token) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{2}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{2}
 }
 func (m *OAuth2Token) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_OAuth2Token.Unmarshal(m, b)
@@ -156,8 +160,8 @@ func (m *OAuth2Token) XXX_Unmarshal(b []byte) error {
 func (m *OAuth2Token) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_OAuth2Token.Marshal(b, m, deterministic)
 }
-func (dst *OAuth2Token) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_OAuth2Token.Merge(dst, src)
+func (m *OAuth2Token) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OAuth2Token.Merge(m, src)
 }
 func (m *OAuth2Token) XXX_Size() int {
 	return xxx_messageInfo_OAuth2Token.Size(m)
@@ -212,7 +216,7 @@ func (m *Github) Reset()         { *m = Github{} }
 func (m *Github) String() string { return proto.CompactTextString(m) }
 func (*Github) ProtoMessage()    {}
 func (*Github) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{3}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{3}
 }
 func (m *Github) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Github.Unmarshal(m, b)
@@ -220,8 +224,8 @@ func (m *Github) XXX_Unmarshal(b []byte) error {
 func (m *Github) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Github.Marshal(b, m, deterministic)
 }
-func (dst *Github) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Github.Merge(dst, src)
+func (m *Github) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Github.Merge(m, src)
 }
 func (m *Github) XXX_Size() int {
 	return xxx_messageInfo_Github.Size(m)
@@ -290,7 +294,7 @@ func (m *Gitlab) Reset()         { *m = Gitlab{} }
 func (m *Gitlab) String() string { return proto.CompactTextString(m) }
 func (*Gitlab) ProtoMessage()    {}
 func (*Gitlab) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{4}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{4}
 }
 func (m *Gitlab) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Gitlab.Unmarshal(m, b)
@@ -298,8 +302,8 @@ func (m *Gitlab) XXX_Unmarshal(b []byte) error {
 func (m *Gitlab) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Gitlab.Marshal(b, m, deterministic)
 }
-func (dst *Gitlab) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Gitlab.Merge(dst, src)
+func (m *Gitlab) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Gitlab.Merge(m, src)
 }
 func (m *Gitlab) XXX_Size() int {
 	return xxx_messageInfo_Gitlab.Size(m)
@@ -367,7 +371,7 @@ func (m *Bitbucket) Reset()         { *m = Bitbucket{} }
 func (m *Bitbucket) String() string { return proto.CompactTextString(m) }
 func (*Bitbucket) ProtoMessage()    {}
 func (*Bitbucket) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{5}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{5}
 }
 func (m *Bitbucket) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Bitbucket.Unmarshal(m, b)
@@ -375,8 +379,8 @@ func (m *Bitbucket) XXX_Unmarshal(b []byte) error {
 func (m *Bitbucket) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Bitbucket.Marshal(b, m, deterministic)
 }
-func (dst *Bitbucket) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Bitbucket.Merge(dst, src)
+func (m *Bitbucket) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Bitbucket.Merge(m, src)
 }
 func (m *Bitbucket) XXX_Size() int {
 	return xxx_messageInfo_Bitbucket.Size(m)
@@ -439,7 +443,7 @@ func (m *Generic) Reset()         { *m = Generic{} }
 func (m *Generic) String() string { return proto.CompactTextString(m) }
 func (*Generic) ProtoMessage()    {}
 func (*Generic) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{6}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{6}
 }
 func (m *Generic) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Generic.Unmarshal(m, b)
@@ -447,8 +451,8 @@ func (m *Generic) XXX_Unmarshal(b []byte) error {
 func (m *Generic) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Generic.Marshal(b, m, deterministic)
 }
-func (dst *Generic) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Generic.Merge(dst, src)
+func (m *Generic) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Generic.Merge(m, src)
 }
 func (m *Generic) XXX_Size() int {
 	return xxx_messageInfo_Generic.Size(m)
@@ -519,7 +523,7 @@ func (m *Static) Reset()         { *m = Static{} }
 func (m *Static) String() string { return proto.CompactTextString(m) }
 func (*Static) ProtoMessage()    {}
 func (*Static) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{7}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{7}
 }
 func (m *Static) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Static.Unmarshal(m, b)
@@ -527,8 +531,8 @@ func (m *Static) XXX_Unmarshal(b []byte) error {
 func (m *Static) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Static.Marshal(b, m, deterministic)
 }
-func (dst *Static) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Static.Merge(dst, src)
+func (m *Static) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Static.Merge(m, src)
 }
 func (m *Static) XXX_Size() int {
 	return xxx_messageInfo_Static.Size(m)
@@ -557,7 +561,7 @@ func (m *Rds) Reset()         { *m = Rds{} }
 func (m *Rds) String() string { return proto.CompactTextString(m) }
 func (*Rds) ProtoMessage()    {}
 func (*Rds) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{8}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{8}
 }
 func (m *Rds) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Rds.Unmarshal(m, b)
@@ -565,8 +569,8 @@ func (m *Rds) XXX_Unmarshal(b []byte) error {
 func (m *Rds) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Rds.Marshal(b, m, deterministic)
 }
-func (dst *Rds) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Rds.Merge(dst, src)
+func (m *Rds) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Rds.Merge(m, src)
 }
 func (m *Rds) XXX_Size() int {
 	return xxx_messageInfo_Rds.Size(m)
@@ -600,7 +604,7 @@ func (m *Account) Reset()         { *m = Account{} }
 func (m *Account) String() string { return proto.CompactTextString(m) }
 func (*Account) ProtoMessage()    {}
 func (*Account) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{9}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{9}
 }
 func (m *Account) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Account.Unmarshal(m, b)
@@ -608,8 +612,8 @@ func (m *Account) XXX_Unmarshal(b []byte) error {
 func (m *Account) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Account.Marshal(b, m, deterministic)
 }
-func (dst *Account) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Account.Merge(dst, src)
+func (m *Account) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Account.Merge(m, src)
 }
 func (m *Account) XXX_Size() int {
 	return xxx_messageInfo_Account.Size(m)
@@ -673,7 +677,7 @@ func (m *Configuration) Reset()         { *m = Configuration{} }
 func (m *Configuration) String() string { return proto.CompactTextString(m) }
 func (*Configuration) ProtoMessage()    {}
 func (*Configuration) Descriptor() ([]byte, []int) {
-	return fileDescriptor_config_0fd71ce46baf0671, []int{10}
+	return fileDescriptor_3eaf2c85e69e9ea4, []int{10}
 }
 func (m *Configuration) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Configuration.Unmarshal(m, b)
@@ -681,8 +685,8 @@ func (m *Configuration) XXX_Unmarshal(b []byte) error {
 func (m *Configuration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	return xxx_messageInfo_Configuration.Marshal(b, m, deterministic)
 }
-func (dst *Configuration) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_Configuration.Merge(dst, src)
+func (m *Configuration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Configuration.Merge(m, src)
 }
 func (m *Configuration) XXX_Size() int {
 	return xxx_messageInfo_Configuration.Size(m)
@@ -701,6 +705,7 @@ func (m *Configuration) GetAccounts() []*Account {
 }
 
 func init() {
+	proto.RegisterEnum("cloud.deps.rds.config.CloneStrategy", CloneStrategy_name, CloneStrategy_value)
 	proto.RegisterType((*Basic)(nil), "cloud.deps.rds.config.Basic")
 	proto.RegisterType((*OAuthToken)(nil), "cloud.deps.rds.config.OAuthToken")
 	proto.RegisterType((*OAuth2Token)(nil), "cloud.deps.rds.config.OAuth2Token")
@@ -712,12 +717,11 @@ func init() {
 	proto.RegisterType((*Rds)(nil), "cloud.deps.rds.config.Rds")
 	proto.RegisterType((*Account)(nil), "cloud.deps.rds.config.Account")
 	proto.RegisterType((*Configuration)(nil), "cloud.deps.rds.config.Configuration")
-	proto.RegisterEnum("cloud.deps.rds.config.CloneStrategy", CloneStrategy_name, CloneStrategy_value)
 }
 
-func init() { proto.RegisterFile("config.proto", fileDescriptor_config_0fd71ce46baf0671) }
+func init() { proto.RegisterFile("config.proto", fileDescriptor_3eaf2c85e69e9ea4) }
 
-var fileDescriptor_config_0fd71ce46baf0671 = []byte{
+var fileDescriptor_3eaf2c85e69e9ea4 = []byte{
 	// 811 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x55, 0xdd, 0x6e, 0x1b, 0x45,
 	0x14, 0x66, 0x63, 0x7b, 0x6d, 0x9f, 0xd4, 0x21, 0x1a, 0x15, 0xb4, 0x84, 0x16, 0x99, 0x55, 0x11,
