@@ -39,8 +39,16 @@
         "repositories": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/apiRepository"
           }
+        }
+      }
+    },
+    "apiRepository": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
         }
       }
     }
