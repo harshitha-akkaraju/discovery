@@ -49,6 +49,14 @@
       "properties": {
         "url": {
           "type": "string"
+        },
+        "repository_last_modified": {
+          "type": "string",
+          "format": "int64"
+        },
+        "repository_last_checked": {
+          "type": "string",
+          "format": "int64"
         }
       }
     }
