@@ -2,6 +2,7 @@ package remotes
 
 import (
 	"fmt"
+	"github.com/deps-cloud/rds/api"
 
 	"github.com/davidji99/go-bitbucket"
 	"github.com/deps-cloud/rds/pkg/config"
@@ -33,11 +34,11 @@ func NewBitbucketRemote(cfg *config.Bitbucket) (Remote, error) {
 
 var _ Remote = &bitbucketRemote{}
 
-func convertRepositoriesResponse(response interface{}, strategy string) []string {
+func convertRepositoriesResponse(response interface{}, strategy string) []*api.Repository {
 	rdata := response.(map[string]interface{})
 	values := rdata["values"].([]interface{})
 
-	repos := make([]string, 0, len(values))
+	repos := make([]*api.Repository, 0, len(values))
 	for _, value := range values {
 		val := value.(map[string]interface{})
 
@@ -49,7 +50,9 @@ func convertRepositoriesResponse(response interface{}, strategy string) []string
 			curl := cloneURL.(map[string]interface{})
 
 			if curl["name"].(string) == strategy {
-				repos = append(repos, curl["href"].(string))
+				repos = append(repos, &api.Repository{
+					Url: curl["href"].(string),
+				})
 			}
 		}
 	}
@@ -62,9 +65,9 @@ type bitbucketRemote struct {
 	config *config.Bitbucket
 }
 
-func (r *bitbucketRemote) ListRepositories() ([]string, error) {
+func (r *bitbucketRemote) ListRepositories() ([]*api.Repository, error) {
 	pageLen := uint64(10)
-	allRepos := make([]string, 0)
+	allRepos := make([]*api.Repository, 0)
 
 	strategy := "ssh"
 	if r.config.GetStrategy() == config.CloneStrategy_HTTP {

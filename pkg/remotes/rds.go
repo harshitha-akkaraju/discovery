@@ -30,7 +30,7 @@ type rdsRemote struct {
 	client api.RepositoryDiscoveryClient
 }
 
-func (r *rdsRemote) ListRepositories() ([]string, error) {
+func (r *rdsRemote) ListRepositories() ([]*api.Repository, error) {
 	response, err := r.client.List(context.Background(), &api.ListRepositoriesRequest{})
 	if err != nil {
 		return nil, err

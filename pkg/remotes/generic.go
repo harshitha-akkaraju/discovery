@@ -3,6 +3,7 @@ package remotes
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/deps-cloud/rds/api"
 	"io/ioutil"
 	"net/http"
 
@@ -25,7 +26,7 @@ type genericRemote struct {
 	config *config.Generic
 }
 
-func (r *genericRemote) ListRepositories() ([]string, error) {
+func (r *genericRemote) ListRepositories() ([]*api.Repository, error) {
 	tokens, err := jee.Lexer(r.config.Selector)
 	if err != nil {
 		return nil, err
@@ -38,7 +39,7 @@ func (r *genericRemote) ListRepositories() ([]string, error) {
 
 	logrus.Infof("[remotes.generic] requesting data from generic endpoint: %s", r.config.BaseUrl)
 
-	repositories := make([]string, 0)
+	repositories := make([]*api.Repository, 0)
 	for page := 1; true; page++ {
 		fullURL := fmt.Sprintf(
 			"%s%s?%s=%d&%s=%d",
@@ -80,7 +81,9 @@ func (r *genericRemote) ListRepositories() ([]string, error) {
 		resultArray := result.([]interface{})
 		for _, entry := range resultArray {
 			entryString := entry.(string)
-			repositories = append(repositories, entryString)
+			repositories = append(repositories, &api.Repository{
+				Url: entryString,
+			})
 		}
 
 		if int32(len(resultArray)) < r.config.PageSize {

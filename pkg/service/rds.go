@@ -44,15 +44,8 @@ type repositoryDiscoveryService struct {
 
 func (s *repositoryDiscoveryService) List(ctx context.Context, req *api.ListRepositoriesRequest) (*api.ListRepositoriesResponse, error) {
 	snapshot := s.repositoryStore.Snapshot()
-	repositories := make([]*api.Repository, len(snapshot))
-
-	for i, url := range snapshot {
-		repositories[i] = &api.Repository{
-			Url: url,
-		}
-	}
 
 	return &api.ListRepositoriesResponse{
-		Repositories: repositories,
+		Repositories: snapshot,
 	}, nil
 }

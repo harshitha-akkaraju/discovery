@@ -12,6 +12,9 @@ option java_outer_classname = "RDSProto";
 
 message Repository {
     string url = 1;
+
+    int64 repository_last_modified = 10;
+    int64 repository_last_checked = 11;
 }
 
 message ListRepositoriesRequest {}

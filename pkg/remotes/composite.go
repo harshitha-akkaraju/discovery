@@ -1,6 +1,9 @@
 package remotes
 
-import "github.com/sirupsen/logrus"
+import (
+	"github.com/deps-cloud/rds/api"
+	"github.com/sirupsen/logrus"
+)
 
 // NewCompositeRemote wraps the supplied remotes in a composite wrapper
 // which logs errors and continues processing remote endpoints.
@@ -16,8 +19,8 @@ type compositeRemote struct {
 	remotes []Remote
 }
 
-func (r *compositeRemote) ListRepositories() ([]string, error) {
-	repositories := make([]string, 0)
+func (r *compositeRemote) ListRepositories() ([]*api.Repository, error) {
+	repositories := make([]*api.Repository, 0)
 	for _, remote := range r.remotes {
 		repos, err := remote.ListRepositories()
 

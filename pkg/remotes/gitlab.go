@@ -2,6 +2,7 @@ package remotes
 
 import (
 	"fmt"
+	"github.com/deps-cloud/rds/api"
 
 	"github.com/deps-cloud/rds/pkg/config"
 	"github.com/sirupsen/logrus"
@@ -38,8 +39,8 @@ type gitlabRemote struct {
 	client *gitlab.Client
 }
 
-func (r *gitlabRemote) ListRepositories() ([]string, error) {
-	repositories := make([]string, 0)
+func (r *gitlabRemote) ListRepositories() ([]*api.Repository, error) {
+	repositories := make([]*api.Repository, 0)
 	groups := make(map[string]bool, 0)
 	for _, group := range r.config.GetGroups() {
 		groups[group] = true
@@ -84,13 +85,16 @@ func (r *gitlabRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			urls := make([]string, len(projects))
+			urls := make([]*api.Repository, len(projects))
 
 			for i, project := range projects {
+				url := project.SSHURLToRepo
 				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
-					urls[i] = project.HTTPURLToRepo
-				} else {
-					urls[i] = project.SSHURLToRepo
+					url = project.HTTPURLToRepo
+				}
+
+				urls[i] = &api.Repository{
+					Url: url,
 				}
 			}
 
@@ -117,13 +121,16 @@ func (r *gitlabRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			urls := make([]string, len(projects))
+			urls := make([]*api.Repository, len(projects))
 
 			for i, project := range projects {
+				url := project.SSHURLToRepo
 				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
-					urls[i] = project.HTTPURLToRepo
-				} else {
-					urls[i] = project.SSHURLToRepo
+					url = project.HTTPURLToRepo
+				}
+
+				urls[i] = &api.Repository{
+					Url: url,
 				}
 			}
 

@@ -2,6 +2,7 @@ package remotes
 
 import (
 	"context"
+	"github.com/deps-cloud/rds/api"
 	"net/http"
 
 	"github.com/deps-cloud/rds/pkg/config"
@@ -52,9 +53,9 @@ type githubRemote struct {
 	client *github.Client
 }
 
-func (r *githubRemote) ListRepositories() ([]string, error) {
+func (r *githubRemote) ListRepositories() ([]*api.Repository, error) {
 	organizations := make([]string, 0)
-	repositories := make([]string, 0)
+	repositories := make([]*api.Repository, 0)
 
 	if r.config.Organizations != nil {
 		// init with configured orgs
@@ -99,13 +100,16 @@ func (r *githubRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			urls := make([]string, len(repos))
+			urls := make([]*api.Repository, len(repos))
 
 			for i, repo := range repos {
+				url := repo.GetSSHURL()
 				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
-					urls[i] = repo.GetCloneURL()
-				} else {
-					urls[i] = repo.GetSSHURL()
+					url = repo.GetCloneURL()
+				}
+
+				urls[i] = &api.Repository{
+					Url: url,
 				}
 			}
 
@@ -130,13 +134,16 @@ func (r *githubRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			urls := make([]string, len(orgRepos))
+			urls := make([]*api.Repository, len(orgRepos))
 
 			for i, orgRepo := range orgRepos {
+				url := orgRepo.GetSSHURL()
 				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
-					urls[i] = orgRepo.GetCloneURL()
-				} else {
-					urls[i] = orgRepo.GetSSHURL()
+					url = orgRepo.GetCloneURL()
+				}
+
+				urls[i] = &api.Repository{
+					Url: url,
 				}
 			}
 
