@@ -12,6 +12,8 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/health"
+	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 )
 
 func main() {
@@ -41,8 +43,13 @@ func main() {
 
 			impl := service.NewServer(remote)
 
+			healthcheck := health.NewServer()
+			// toggle the service health as such
+			// healthcheck.SetServingStatus("", healthpb.HealthCheckResponse_NOT_SERVING)
+
 			server := grpc.NewServer()
 			api.RegisterRepositoryDiscoveryServer(server, impl)
+			healthpb.RegisterHealthServer(server, healthcheck)
 
 			logrus.Infof("[main] starting gRPC on %s", address)
 			if err := server.Serve(listener); err != nil {
