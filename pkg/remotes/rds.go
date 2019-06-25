@@ -14,6 +14,7 @@ var _ Remote = &rdsRemote{}
 func NewRDSRemote(config *config.Rds) (Remote, error) {
 	opts := []grpc.DialOption{
 		grpc.WithBlock(),
+		grpc.WithInsecure(),
 	}
 
 	cc, err := grpc.Dial(config.Target, opts...)
