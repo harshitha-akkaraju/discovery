@@ -5,8 +5,11 @@ import (
 	"net/http"
 
 	"github.com/deps-cloud/rds/pkg/config"
+
 	"github.com/google/go-github/v20/github"
+
 	"github.com/sirupsen/logrus"
+
 	"golang.org/x/oauth2"
 )
 

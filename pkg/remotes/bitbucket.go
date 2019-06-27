@@ -4,7 +4,9 @@ import (
 	"fmt"
 
 	"github.com/davidji99/go-bitbucket"
+
 	"github.com/deps-cloud/rds/pkg/config"
+
 	"github.com/sirupsen/logrus"
 )
 
