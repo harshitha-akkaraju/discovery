@@ -4,14 +4,14 @@ RUN go get golang.org/x/lint/golint
 
 ENV GO111MODULE on
 
-WORKDIR /go/src/rds
+WORKDIR /go/src/discovery
 
 COPY . .
 
 RUN make deps && make test && make install
 
-RUN useradd -ms /bin/sh rds
-WORKDIR /home/rds
-USER rds
+RUN useradd -ms /bin/sh discovery
+WORKDIR /home/discovery
+USER discovery
 
-ENTRYPOINT [ "rds" ]
+ENTRYPOINT [ "discovery" ]

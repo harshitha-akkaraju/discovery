@@ -1,9 +1,9 @@
 {
-  "name": "@deps-cloud/rds",
+  "name": "@deps-cloud/discovery",
   "description": "Repository discovery service",
   "version": "0.0.11",
   "repository": {
     "type": "git",
-    "url": "git@github.com:deps-cloud/rds.git"
+    "url": "git@github.com:deps-cloud/discovery.git"
   }
 }

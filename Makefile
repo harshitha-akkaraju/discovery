@@ -19,14 +19,13 @@ install:
 
 deploy:
 	mkdir -p bin
-	gox -os="windows linux darwin" -arch="amd64 386" -output="bin/{{.Dir}}_{{.OS}}_{{.Arch}}"
-	gox -os="linux" -arch="arm" -output="bin/{{.Dir}}_{{.OS}}_{{.Arch}}"
-	GOOS=linux GOARCH=arm64 go build -o bin/rds_linux_arm64
+	gox -os="windows darwin" -arch="amd64 386" -output="bin/{{.Dir}}_{{.OS}}_{{.Arch}}"
+	gox -os="linux" -arch="amd64 386 arm arm64" -output="bin/{{.Dir}}_{{.OS}}_{{.Arch}}"
 
 docker:
-	docker build -t depscloud/rds:latest -f Dockerfile.dev .
+	docker build -t depscloud/discovery:latest -f Dockerfile.dev .
 
 dockerx:
-	docker buildx rm depscloud--rds || echo "depscloud--rds does not exist"
-	docker buildx create --name depscloud--rds --use
-	docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t depscloud/rds:latest .
+	docker buildx rm depscloud--discovery || echo "depscloud--discovery does not exist"
+	docker buildx create --name depscloud--discovery --use
+	docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t depscloud/discovery:latest .
