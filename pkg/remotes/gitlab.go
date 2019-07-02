@@ -3,7 +3,7 @@ package remotes
 import (
 	"fmt"
 
-	"github.com/deps-cloud/rds/pkg/config"
+	"github.com/deps-cloud/discovery/pkg/config"
 
 	"github.com/sirupsen/logrus"
 

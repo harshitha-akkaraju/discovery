@@ -5,10 +5,10 @@ import (
 	"net"
 	"os"
 
-	"github.com/deps-cloud/rds/api"
-	"github.com/deps-cloud/rds/pkg/config"
-	"github.com/deps-cloud/rds/pkg/remotes"
-	"github.com/deps-cloud/rds/pkg/service"
+	"github.com/deps-cloud/discovery/api"
+	"github.com/deps-cloud/discovery/pkg/config"
+	"github.com/deps-cloud/discovery/pkg/remotes"
+	"github.com/deps-cloud/discovery/pkg/service"
 
 	"github.com/sirupsen/logrus"
 
@@ -24,8 +24,8 @@ func main() {
 	port := 8090
 
 	cmd := &cobra.Command{
-		Use:   "rds",
-		Short: "rds runs the repository discovery service.",
+		Use:   "discovery",
+		Short: "discovery runs the repository discovery service.",
 		Run: func(cmd *cobra.Command, args []string) {
 			address := fmt.Sprintf(":%d", port)
 

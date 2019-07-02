@@ -3,7 +3,7 @@ package config_test
 import (
 	"testing"
 
-	"github.com/deps-cloud/rds/pkg/config"
+	"github.com/deps-cloud/discovery/pkg/config"
 
 	"github.com/stretchr/testify/require"
 )

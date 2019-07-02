@@ -21,7 +21,7 @@ Getting started with RDS is really quick and easy.
 
 Releases for this project can be found here under github's releases integration.
 
-https://github.com/deps-cloud/rds/releases
+https://github.com/deps-cloud/discovery/releases
 
 ### Configuring rds
 

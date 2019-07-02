@@ -3,9 +3,9 @@ package service
 import (
 	"time"
 
-	"github.com/deps-cloud/rds/api"
-	"github.com/deps-cloud/rds/pkg/remotes"
-	"github.com/deps-cloud/rds/pkg/service/store"
+	"github.com/deps-cloud/discovery/api"
+	"github.com/deps-cloud/discovery/pkg/remotes"
+	"github.com/deps-cloud/discovery/pkg/service/store"
 
 	"github.com/sirupsen/logrus"
 

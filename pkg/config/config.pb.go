@@ -207,7 +207,7 @@ type Github struct {
 	UploadUrl            *wrappers.StringValue `protobuf:"bytes,2,opt,name=upload_url,json=uploadUrl,proto3" json:"upload_url,omitempty"`
 	Users                []string              `protobuf:"bytes,3,rep,name=users,proto3" json:"users,omitempty"`
 	Organizations        []string              `protobuf:"bytes,4,rep,name=organizations,proto3" json:"organizations,omitempty"`
-	Strategy             CloneStrategy         `protobuf:"varint,5,opt,name=strategy,proto3,enum=cloud.deps.rds.config.CloneStrategy" json:"strategy,omitempty"`
+	Strategy             CloneStrategy         `protobuf:"varint,5,opt,name=strategy,proto3,enum=cloud.deps.discovery.config.CloneStrategy" json:"strategy,omitempty"`
 	Oauth2               *OAuth2Token          `protobuf:"bytes,10,opt,name=oauth2,proto3" json:"oauth2,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
 	XXX_unrecognized     []byte                `json:"-"`
@@ -284,7 +284,7 @@ type Gitlab struct {
 	BaseUrl              *wrappers.StringValue `protobuf:"bytes,1,opt,name=base_url,json=baseUrl,proto3" json:"base_url,omitempty"`
 	Users                []string              `protobuf:"bytes,3,rep,name=users,proto3" json:"users,omitempty"`
 	Groups               []string              `protobuf:"bytes,4,rep,name=groups,proto3" json:"groups,omitempty"`
-	Strategy             CloneStrategy         `protobuf:"varint,5,opt,name=strategy,proto3,enum=cloud.deps.rds.config.CloneStrategy" json:"strategy,omitempty"`
+	Strategy             CloneStrategy         `protobuf:"varint,5,opt,name=strategy,proto3,enum=cloud.deps.discovery.config.CloneStrategy" json:"strategy,omitempty"`
 	Private              *OAuthToken           `protobuf:"bytes,10,opt,name=private,proto3" json:"private,omitempty"`
 	Oauth                *OAuthToken           `protobuf:"bytes,11,opt,name=oauth,proto3" json:"oauth,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
@@ -361,7 +361,7 @@ func (m *Gitlab) GetOauth() *OAuthToken {
 type Bitbucket struct {
 	Users                []string      `protobuf:"bytes,3,rep,name=users,proto3" json:"users,omitempty"`
 	Teams                []string      `protobuf:"bytes,4,rep,name=teams,proto3" json:"teams,omitempty"`
-	Strategy             CloneStrategy `protobuf:"varint,5,opt,name=strategy,proto3,enum=cloud.deps.rds.config.CloneStrategy" json:"strategy,omitempty"`
+	Strategy             CloneStrategy `protobuf:"varint,5,opt,name=strategy,proto3,enum=cloud.deps.discovery.config.CloneStrategy" json:"strategy,omitempty"`
 	Basic                *Basic        `protobuf:"bytes,10,opt,name=basic,proto3" json:"basic,omitempty"`
 	Oauth                *OAuthToken   `protobuf:"bytes,11,opt,name=oauth,proto3" json:"oauth,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
@@ -707,18 +707,18 @@ func (m *Configuration) GetAccounts() []*Account {
 }
 
 func init() {
-	proto.RegisterEnum("cloud.deps.rds.config.CloneStrategy", CloneStrategy_name, CloneStrategy_value)
-	proto.RegisterType((*Basic)(nil), "cloud.deps.rds.config.Basic")
-	proto.RegisterType((*OAuthToken)(nil), "cloud.deps.rds.config.OAuthToken")
-	proto.RegisterType((*OAuth2Token)(nil), "cloud.deps.rds.config.OAuth2Token")
-	proto.RegisterType((*Github)(nil), "cloud.deps.rds.config.Github")
-	proto.RegisterType((*Gitlab)(nil), "cloud.deps.rds.config.Gitlab")
-	proto.RegisterType((*Bitbucket)(nil), "cloud.deps.rds.config.Bitbucket")
-	proto.RegisterType((*Generic)(nil), "cloud.deps.rds.config.Generic")
-	proto.RegisterType((*Static)(nil), "cloud.deps.rds.config.Static")
-	proto.RegisterType((*Rds)(nil), "cloud.deps.rds.config.Rds")
-	proto.RegisterType((*Account)(nil), "cloud.deps.rds.config.Account")
-	proto.RegisterType((*Configuration)(nil), "cloud.deps.rds.config.Configuration")
+	proto.RegisterEnum("cloud.deps.discovery.config.CloneStrategy", CloneStrategy_name, CloneStrategy_value)
+	proto.RegisterType((*Basic)(nil), "cloud.deps.discovery.config.Basic")
+	proto.RegisterType((*OAuthToken)(nil), "cloud.deps.discovery.config.OAuthToken")
+	proto.RegisterType((*OAuth2Token)(nil), "cloud.deps.discovery.config.OAuth2Token")
+	proto.RegisterType((*Github)(nil), "cloud.deps.discovery.config.Github")
+	proto.RegisterType((*Gitlab)(nil), "cloud.deps.discovery.config.Gitlab")
+	proto.RegisterType((*Bitbucket)(nil), "cloud.deps.discovery.config.Bitbucket")
+	proto.RegisterType((*Generic)(nil), "cloud.deps.discovery.config.Generic")
+	proto.RegisterType((*Static)(nil), "cloud.deps.discovery.config.Static")
+	proto.RegisterType((*Rds)(nil), "cloud.deps.discovery.config.Rds")
+	proto.RegisterType((*Account)(nil), "cloud.deps.discovery.config.Account")
+	proto.RegisterType((*Configuration)(nil), "cloud.deps.discovery.config.Configuration")
 }
 
 func init() { proto.RegisterFile("config.proto", fileDescriptor_3eaf2c85e69e9ea4) }

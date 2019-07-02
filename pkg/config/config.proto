@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package cloud.deps.rds.config;
+package cloud.deps.discovery.config;
 
 import "github.com/golang/protobuf/ptypes/wrappers/wrappers.proto";
 

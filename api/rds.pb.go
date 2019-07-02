@@ -97,8 +97,8 @@ func (m *ListRepositoriesResponse) GetRepositories() []string {
 }
 
 func init() {
-	proto.RegisterType((*ListRepositoriesRequest)(nil), "cloud.deps.rds.api.ListRepositoriesRequest")
-	proto.RegisterType((*ListRepositoriesResponse)(nil), "cloud.deps.rds.api.ListRepositoriesResponse")
+	proto.RegisterType((*ListRepositoriesRequest)(nil), "cloud.deps.discovery.api.ListRepositoriesRequest")
+	proto.RegisterType((*ListRepositoriesResponse)(nil), "cloud.deps.discovery.api.ListRepositoriesResponse")
 }
 
 func init() { proto.RegisterFile("rds.proto", fileDescriptor_6eac9d3f8ca57de4) }
@@ -149,7 +149,7 @@ func NewRepositoryDiscoveryClient(cc *grpc.ClientConn) RepositoryDiscoveryClient
 
 func (c *repositoryDiscoveryClient) List(ctx context.Context, in *ListRepositoriesRequest, opts ...grpc.CallOption) (*ListRepositoriesResponse, error) {
 	out := new(ListRepositoriesResponse)
-	err := c.cc.Invoke(ctx, "/cloud.deps.rds.api.RepositoryDiscovery/List", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/cloud.deps.discovery.api.RepositoryDiscovery/List", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -183,7 +183,7 @@ func _RepositoryDiscovery_List_Handler(srv interface{}, ctx context.Context, dec
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/cloud.deps.rds.api.RepositoryDiscovery/List",
+		FullMethod: "/cloud.deps.discovery.api.RepositoryDiscovery/List",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(RepositoryDiscoveryServer).List(ctx, req.(*ListRepositoriesRequest))
@@ -192,7 +192,7 @@ func _RepositoryDiscovery_List_Handler(srv interface{}, ctx context.Context, dec
 }
 
 var _RepositoryDiscovery_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "cloud.deps.rds.api.RepositoryDiscovery",
+	ServiceName: "cloud.deps.discovery.api.RepositoryDiscovery",
 	HandlerType: (*RepositoryDiscoveryServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -3,7 +3,7 @@ package remotes
 import (
 	"fmt"
 
-	"github.com/deps-cloud/rds/pkg/config"
+	"github.com/deps-cloud/discovery/pkg/config"
 )
 
 // ParseConfig is used to parse the account configuration and construct the

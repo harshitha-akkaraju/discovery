@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/deps-cloud/rds/pkg/config"
+	"github.com/deps-cloud/discovery/pkg/config"
 
 	"github.com/google/go-github/v20/github"
 

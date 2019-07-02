@@ -1,6 +1,6 @@
 package remotes
 
-import "github.com/deps-cloud/rds/pkg/config"
+import "github.com/deps-cloud/discovery/pkg/config"
 
 var _ Remote = &staticRemote{}
 
