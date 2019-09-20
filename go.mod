@@ -1,7 +1,7 @@
 module github.com/deps-cloud/discovery
 
 require (
-	github.com/davidji99/go-bitbucket v0.5.0
+	github.com/davidji99/bitbucket-go v0.1.2
 	github.com/ghodss/yaml v1.0.0
 	github.com/gogo/protobuf v1.2.1
 	github.com/golang/protobuf v1.3.1
@@ -15,7 +15,7 @@ require (
 	github.com/stretchr/testify v1.3.0
 	github.com/xanzy/go-gitlab v0.17.0
 	golang.org/x/net v0.0.0-20190514140710-3ec191127204
-	golang.org/x/oauth2 v0.0.0-20190517181255-950ef44c6e07
+	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sys v0.0.0-20190516110030-61b9204099cb // indirect
 	golang.org/x/text v0.3.2 // indirect
 	google.golang.org/appengine v1.6.0 // indirect

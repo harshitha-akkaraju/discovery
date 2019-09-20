@@ -5,6 +5,7 @@ build-deps:
 	GO111MODULE=off go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
 	GO111MODULE=off go get -u github.com/golang/protobuf/protoc-gen-go
 	GO111MODULE=off go get -u github.com/gogo/protobuf/protoc-gen-gogo
+	GO111MODULE=off go get -u golang.org/x/lint/golint
 
 deps:
 	go get -v ./...
