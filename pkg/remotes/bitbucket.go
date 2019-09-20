@@ -3,7 +3,7 @@ package remotes
 import (
 	"fmt"
 
-	"github.com/davidji99/go-bitbucket"
+	"github.com/davidji99/bitbucket-go/bitbucket"
 
 	"github.com/deps-cloud/discovery/pkg/config"
 
@@ -77,13 +77,9 @@ func (r *bitbucketRemote) ListRepositories() ([]string, error) {
 		logrus.Infof("[remotes.bitbucket] fetching projects for user: %s", user)
 
 		for page := uint64(1); true; page++ {
-			repos, err := r.client.Repositories.ListForAccount(&bitbucket.RepositoriesOptions{
-				ListOptions: &bitbucket.ListOptions{
-					Page: page,
-					PageLen: pageLen,
-				},
-				Owner: user,
-				Role:  "contributor",
+			repos, _, err := r.client.Repositories.List(user, &bitbucket.ListOpts{
+				Page: int64(page),
+				Pagelen: int64(pageLen),
 			})
 
 			if err != nil {
@@ -104,13 +100,9 @@ func (r *bitbucketRemote) ListRepositories() ([]string, error) {
 		logrus.Infof("[remotes.bitbucket] fetching projects for team: %s", team)
 
 		for page := uint64(1); true; page++ {
-			repos, err := r.client.Repositories.ListForTeam(&bitbucket.RepositoriesOptions{
-				ListOptions: &bitbucket.ListOptions{
-					Page: page,
-					PageLen: pageLen,
-				},
-				Owner: team,
-				Role:  "contributor",
+			repos, _, err := r.client.Repositories.List(team, &bitbucket.ListOpts{
+				Page: int64(page),
+				Pagelen: int64(pageLen),
 			})
 
 			if err != nil {
