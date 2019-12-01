@@ -15,6 +15,15 @@ type staticRemote struct {
 	cfg *config.Static
 }
 
-func (s *staticRemote) ListRepositories() ([]string, error) {
-	return s.cfg.RepositoryUrls[0:], nil
+func (s *staticRemote) FetchRepositories(request *FetchRepositoriesRequest) (*FetchRepositoriesResponse, error) {
+	repositories := make([]*Repository, len(s.cfg.RepositoryUrls))
+	for i, repositoryURL := range s.cfg.RepositoryUrls {
+		repositories[i] = &Repository{
+			RepositoryURL: repositoryURL,
+			Clone:         s.cfg.GetClone(),
+		}
+	}
+	return &FetchRepositoriesResponse{
+		Repositories: repositories,
+	}, nil
 }

@@ -1,8 +1,20 @@
 package remotes
 
-// Remote defines a remote source of repositories.
+import "github.com/deps-cloud/discovery/pkg/config"
+
+type Repository struct {
+	RepositoryURL string
+	Clone *config.Clone
+}
+
+type FetchRepositoriesRequest struct {
+
+}
+
+type FetchRepositoriesResponse struct {
+	Repositories []*Repository
+}
+
 type Remote interface {
-	// ListRepositories returns a list of git ssh urls for the given remote interface.
-	// The urls will be used to clone repositories on the fly as users navigate the filesystem.
-	ListRepositories() ([]string, error)
+	FetchRepositories(request *FetchRepositoriesRequest) (*FetchRepositoriesResponse, error)
 }

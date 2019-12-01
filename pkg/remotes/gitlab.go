@@ -40,8 +40,10 @@ type gitlabRemote struct {
 	client *gitlab.Client
 }
 
-func (r *gitlabRemote) ListRepositories() ([]string, error) {
-	repositories := make([]string, 0)
+func (r *gitlabRemote) FetchRepositories(request *FetchRepositoriesRequest) (*FetchRepositoriesResponse, error) {
+	cloneConfig := r.config.GetClone()
+
+	repositories := make([]*Repository, 0)
 	groups := make(map[string]bool, 0)
 	for _, group := range r.config.GetGroups() {
 		groups[group] = true
@@ -86,13 +88,19 @@ func (r *gitlabRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			urls := make([]string, len(projects))
+			urls := make([]*Repository, len(projects))
 
 			for i, project := range projects {
-				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
-					urls[i] = project.HTTPURLToRepo
+				if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
+					urls[i] = &Repository{
+						RepositoryURL: project.HTTPURLToRepo,
+						Clone: cloneConfig,
+					}
 				} else {
-					urls[i] = project.SSHURLToRepo
+					urls[i] = &Repository{
+						RepositoryURL: project.SSHURLToRepo,
+						Clone: cloneConfig,
+					}
 				}
 			}
 
@@ -119,13 +127,19 @@ func (r *gitlabRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			urls := make([]string, len(projects))
+			urls := make([]*Repository, len(projects))
 
 			for i, project := range projects {
-				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
-					urls[i] = project.HTTPURLToRepo
+				if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
+					urls[i] = &Repository{
+						RepositoryURL: project.HTTPURLToRepo,
+						Clone: cloneConfig,
+					}
 				} else {
-					urls[i] = project.SSHURLToRepo
+					urls[i] = &Repository{
+						RepositoryURL: project.SSHURLToRepo,
+						Clone: cloneConfig,
+					}
 				}
 			}
 
@@ -135,6 +149,8 @@ func (r *gitlabRemote) ListRepositories() ([]string, error) {
 		}
 	}
 
-	return repositories, nil
+	return &FetchRepositoriesResponse{
+		Repositories: repositories,
+	}, nil
 }
 

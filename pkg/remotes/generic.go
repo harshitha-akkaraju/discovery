@@ -28,7 +28,7 @@ type genericRemote struct {
 	config *config.Generic
 }
 
-func (r *genericRemote) ListRepositories() ([]string, error) {
+func (r *genericRemote) FetchRepositories(request *FetchRepositoriesRequest) (*FetchRepositoriesResponse, error) {
 	tokens, err := jee.Lexer(r.config.Selector)
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func (r *genericRemote) ListRepositories() ([]string, error) {
 
 	logrus.Infof("[remotes.generic] requesting data from generic endpoint: %s", r.config.BaseUrl)
 
-	repositories := make([]string, 0)
+	repositories := make([]*Repository, 0)
 	for page := 1; true; page++ {
 		fullURL := fmt.Sprintf(
 			"%s%s?%s=%d&%s=%d",
@@ -83,7 +83,10 @@ func (r *genericRemote) ListRepositories() ([]string, error) {
 		resultArray := result.([]interface{})
 		for _, entry := range resultArray {
 			entryString := entry.(string)
-			repositories = append(repositories, entryString)
+			repositories = append(repositories, &Repository{
+				RepositoryURL: entryString,
+				Clone:         r.config.GetClone(),
+			})
 		}
 
 		if int32(len(resultArray)) < r.config.PageSize {
@@ -92,5 +95,7 @@ func (r *genericRemote) ListRepositories() ([]string, error) {
 		}
 	}
 
-	return repositories, nil
+	return &FetchRepositoriesResponse{
+		Repositories: repositories,
+	}, nil
 }

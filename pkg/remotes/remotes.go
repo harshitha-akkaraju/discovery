@@ -25,8 +25,6 @@ func ParseConfig(configuration *config.Configuration) (Remote, error) {
 			remote, err = NewGitlabRemote(gitlab)
 		} else if static := account.GetStatic(); static != nil {
 			remote = NewStaticRemote(static)
-		} else if rds := account.GetRds(); rds != nil {
-			remote, err = NewRDSRemote(rds)
 		} else {
 			err = fmt.Errorf("unrecognized account")
 		}
