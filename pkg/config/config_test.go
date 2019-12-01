@@ -39,6 +39,12 @@ func testOauth2(t *testing.T, token *config.OAuth2Token) {
 	require.Equal(t, "expiry", token.Expiry.Value)
 }
 
+func testClone(t *testing.T, clone *config.Clone) {
+	require.NotNil(t, clone)
+	require.Equal(t, config.CloneStrategy_HTTP, clone.Strategy)
+	testBasic(t, clone.Basic)
+}
+
 func testGeneric(t *testing.T, generic *config.Generic) {
 	require.NotNil(t, generic)
 	require.Equal(t, "base_url", generic.BaseUrl)
@@ -47,6 +53,7 @@ func testGeneric(t *testing.T, generic *config.Generic) {
 	require.Equal(t, "page_parameter", generic.PageParameter)
 	require.Equal(t, int32(20), generic.PageSize)
 	require.Equal(t, "selector", generic.Selector)
+	testClone(t, generic.Clone)
 }
 
 func testGitlab(t *testing.T, gitlab *config.Gitlab) {
@@ -55,6 +62,7 @@ func testGitlab(t *testing.T, gitlab *config.Gitlab) {
 
 	require.Equal(t, "base_url", gitlab.BaseUrl.Value)
 	require.Equal(t, config.CloneStrategy_HTTP, gitlab.Strategy)
+	testClone(t, gitlab.Clone)
 }
 
 func testGithub(t *testing.T, github *config.Github) {
@@ -74,6 +82,7 @@ func testGithub(t *testing.T, github *config.Github) {
 	require.Contains(t, github.Users, "user1")
 
 	require.Equal(t, config.CloneStrategy_HTTP, github.Strategy)
+	testClone(t, github.Clone)
 }
 
 func testBitbucket(t *testing.T, bitbucket *config.Bitbucket) {
@@ -88,6 +97,7 @@ func testBitbucket(t *testing.T, bitbucket *config.Bitbucket) {
 	require.Contains(t, bitbucket.Users, "user1")
 
 	require.Equal(t, config.CloneStrategy_HTTP, bitbucket.Strategy)
+	testClone(t, bitbucket.Clone)
 }
 
 func testStatic(t *testing.T, static *config.Static) {
@@ -95,15 +105,12 @@ func testStatic(t *testing.T, static *config.Static) {
 	require.Len(t, static.RepositoryUrls, 1)
 
 	require.Contains(t, static.RepositoryUrls, "repository_urls")
-}
 
-func testRds(t *testing.T, rds *config.Rds) {
-	require.NotNil(t, rds)
-	require.Equal(t, rds.Target, "target")
+	testClone(t, static.Clone)
 }
 
 func testCommon(t *testing.T, cfg *config.Configuration) {
-	require.Len(t, cfg.Accounts, 10)
+	require.Len(t, cfg.Accounts, 9)
 
 	{
 		generic := cfg.Accounts[0].GetGeneric()
@@ -154,11 +161,6 @@ func testCommon(t *testing.T, cfg *config.Configuration) {
 	{
 		static := cfg.Accounts[8].GetStatic()
 		testStatic(t, static)
-	}
-
-	{
-		rds := cfg.Accounts[9].GetRds()
-		testRds(t, rds);
 	}
 }
 

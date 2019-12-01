@@ -11,6 +11,18 @@ enum CloneStrategy {
     HTTP = 1;
 }
 
+message Clone {
+    CloneStrategy strategy = 1;
+    Basic basic = 2;
+    PublicKey public_key = 3;
+}
+
+message PublicKey {
+    string public_key_path = 1;
+    string private_key_path = 2;
+    string password = 3;
+}
+
 message Basic {
     string username = 1;
     google.protobuf.StringValue password = 2;
@@ -33,7 +45,8 @@ message Github {
     google.protobuf.StringValue upload_url = 2;
     repeated string users = 3;
     repeated string organizations = 4;
-    CloneStrategy strategy = 5;
+    CloneStrategy strategy = 5 [deprecated = true];
+    Clone clone = 6;
 
     OAuth2Token oauth2 = 10;
 }
@@ -43,7 +56,8 @@ message Gitlab {
 
     repeated string users = 3;
     repeated string groups = 4;
-    CloneStrategy strategy = 5;
+    CloneStrategy strategy = 5 [deprecated = true];
+    Clone clone = 6;
 
     OAuthToken private = 10;
     OAuthToken oauth = 11;
@@ -52,7 +66,8 @@ message Gitlab {
 message Bitbucket {
     repeated string users = 3;
     repeated string teams = 4;
-    CloneStrategy strategy = 5;
+    CloneStrategy strategy = 5 [deprecated = true];
+    Clone clone = 6;
 
     Basic basic = 10;
     OAuthToken oauth = 11;
@@ -65,12 +80,15 @@ message Generic {
     string page_parameter = 4;
     int32 page_size = 5;
     string selector = 6;
+    Clone clone = 7;
 
     Basic basic = 10;
 }
 
 message Static {
     repeated string repository_urls = 1;
+
+    Clone clone = 2;
 }
 
 message Rds {

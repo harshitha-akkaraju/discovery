@@ -6,6 +6,15 @@ accounts {
         per_page_parameter: "per_page_parameter"
         page_size: 20
         selector: "selector"
+        clone {
+            strategy: HTTP
+            basic {
+                username: "username"
+                password: {
+                    value: "password"
+                }
+            }
+        }
     }
 }
 accounts {
@@ -16,6 +25,15 @@ accounts {
         per_page_parameter: "per_page_parameter"
         page_size: 20
         selector: "selector"
+        clone {
+            strategy: HTTP
+            basic {
+                username: "username"
+                password: {
+                    value: "password"
+                }
+            }
+        }
         basic {
             username: "username"
             password: {
@@ -30,6 +48,15 @@ accounts {
             value: "base_url"
         }
         strategy: HTTP
+        clone {
+            strategy: HTTP
+            basic {
+                username: "username"
+                password: {
+                    value: "password"
+                }
+            }
+        }
         private {
             token: "token"
         }
@@ -41,6 +68,15 @@ accounts {
             value: "base_url"
         }
         strategy: HTTP
+        clone {
+            strategy: HTTP
+            basic {
+                username: "username"
+                password: {
+                    value: "password"
+                }
+            }
+        }
         oauth {
             token: "token"
         }
@@ -57,6 +93,15 @@ accounts {
         organizations: "org1"
         users: "user1"
         strategy: HTTP
+        clone {
+            strategy: HTTP
+            basic {
+                username: "username"
+                password: {
+                    value: "password"
+                }
+            }
+        }
     }
 }
 accounts {
@@ -70,6 +115,15 @@ accounts {
         organizations: "org1"
         users: "user1"
         strategy: HTTP
+        clone {
+            strategy: HTTP
+            basic {
+                username: "username"
+                password: {
+                    value: "password"
+                }
+            }
+        }
         oauth2 {
             token: "token"
             token_type: {
@@ -89,6 +143,15 @@ accounts {
         teams: "team1"
         users: "user1"
         strategy: HTTP
+        clone {
+            strategy: HTTP
+            basic {
+                username: "username"
+                password: {
+                    value: "password"
+                }
+            }
+        }
         basic {
             username: "username"
             password: {
@@ -102,6 +165,15 @@ accounts {
         teams: "team1"
         users: "user1"
         strategy: HTTP
+        clone {
+            strategy: HTTP
+            basic {
+                username: "username"
+                password: {
+                    value: "password"
+                }
+            }
+        }
         oauth {
             token: "token"
             application_id: {
@@ -113,10 +185,15 @@ accounts {
 accounts {
     static {
         repository_urls: "repository_urls"
+        clone {
+            strategy: HTTP
+            basic {
+                username: "username"
+                password: {
+                    value: "password"
+                }
+            }
+        }
     }
 }
-accounts {
-    rds {
-        target: "target"
-    }
-}
+

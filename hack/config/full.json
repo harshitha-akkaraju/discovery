@@ -7,7 +7,14 @@
         "pageParameter": "page_parameter",
         "perPageParameter": "per_page_parameter",
         "pageSize": 20,
-        "selector": "selector"
+        "selector": "selector",
+        "clone": {
+          "strategy": "HTTP",
+          "basic": {
+            "password": "password",
+            "username": "username"
+          }
+        }
       }
     },
     {
@@ -18,6 +25,13 @@
         "perPageParameter": "per_page_parameter",
         "pageSize": 20,
         "selector": "selector",
+        "clone": {
+          "strategy": "HTTP",
+          "basic": {
+            "password": "password",
+            "username": "username"
+          }
+        },
         "basic": {
           "password": "password",
           "username": "username"
@@ -28,6 +42,13 @@
       "gitlab": {
         "baseUrl": "base_url",
         "strategy": "HTTP",
+        "clone": {
+          "strategy": "HTTP",
+          "basic": {
+            "password": "password",
+            "username": "username"
+          }
+        },
         "private": {
           "token": "token"
         }
@@ -37,6 +58,13 @@
       "gitlab": {
         "baseUrl": "base_url",
         "strategy": "HTTP",
+        "clone": {
+          "strategy": "HTTP",
+          "basic": {
+            "password": "password",
+            "username": "username"
+          }
+        },
         "oauth": {
           "token": "token"
         }
@@ -52,7 +80,14 @@
         "users": [
           "user1"
         ],
-        "strategy": "HTTP"
+        "strategy": "HTTP",
+        "clone": {
+          "strategy": "HTTP",
+          "basic": {
+            "password": "password",
+            "username": "username"
+          }
+        }
       }
     },
     {
@@ -66,6 +101,13 @@
           "user1"
         ],
         "strategy": "HTTP",
+        "clone": {
+          "strategy": "HTTP",
+          "basic": {
+            "password": "password",
+            "username": "username"
+          }
+        },
         "oauth2": {
           "expiry": "expiry",
           "refreshToken": "refresh_token",
@@ -83,6 +125,13 @@
           "user1"
         ],
         "strategy": "HTTP",
+        "clone": {
+          "strategy": "HTTP",
+          "basic": {
+            "password": "password",
+            "username": "username"
+          }
+        },
         "basic": {
           "password": "password",
           "username": "username"
@@ -98,6 +147,13 @@
           "user1"
         ],
         "strategy": "HTTP",
+        "clone": {
+          "strategy": "HTTP",
+          "basic": {
+            "password": "password",
+            "username": "username"
+          }
+        },
         "oauth": {
           "applicationId": "application_id",
           "token": "token"
@@ -108,12 +164,14 @@
       "static": {
         "repositoryUrls": [
           "repository_urls"
-        ]
-      }
-    },
-    {
-      "rds": {
-        "target": "target"
+        ],
+        "clone": {
+          "strategy": "HTTP",
+          "basic": {
+            "password": "password",
+            "username": "username"
+          }
+        }
       }
     }
   ]
