@@ -5,9 +5,11 @@ package config
 
 import (
 	fmt "fmt"
-	proto "github.com/gogo/protobuf/proto"
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	math "math"
+
+	proto "github.com/gogo/protobuf/proto"
+
+	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

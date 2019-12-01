@@ -82,7 +82,7 @@ func (r *bitbucketRemote) FetchRepositories(request *FetchRepositoriesRequest) (
 
 		for page := uint64(1); true; page++ {
 			repos, _, err := r.client.Repositories.List(user, &bitbucket.ListOpts{
-				Page: int64(page),
+				Page:    int64(page),
 				Pagelen: int64(pageLen),
 			})
 
@@ -105,7 +105,7 @@ func (r *bitbucketRemote) FetchRepositories(request *FetchRepositoriesRequest) (
 
 		for page := uint64(1); true; page++ {
 			repos, _, err := r.client.Repositories.List(team, &bitbucket.ListOpts{
-				Page: int64(page),
+				Page:    int64(page),
 				Pagelen: int64(pageLen),
 			})
 

@@ -51,10 +51,10 @@ func (r *gitlabRemote) FetchRepositories(request *FetchRepositoriesRequest) (*Fe
 
 	logrus.Infof("[remotes.gitlab] fetching groups")
 	page := 1
-	for ; page > 0; {
+	for page > 0 {
 		grps, resp, err := r.client.Groups.ListGroups(&gitlab.ListGroupsOptions{
 			ListOptions: gitlab.ListOptions{
-				Page: page,
+				Page:    page,
 				PerPage: 100,
 			},
 		})
@@ -75,7 +75,7 @@ func (r *gitlabRemote) FetchRepositories(request *FetchRepositoriesRequest) (*Fe
 		logrus.Infof("[remotes.gitlab] fetching projects for user: %s", user)
 
 		page = 1
-		for ; page > 0; {
+		for page > 0 {
 			projects, resp, err := r.client.Projects.ListUserProjects(user, &gitlab.ListProjectsOptions{
 				ListOptions: gitlab.ListOptions{
 					Page:    page,
@@ -94,12 +94,12 @@ func (r *gitlabRemote) FetchRepositories(request *FetchRepositoriesRequest) (*Fe
 				if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
 					urls[i] = &Repository{
 						RepositoryURL: project.HTTPURLToRepo,
-						Clone: cloneConfig,
+						Clone:         cloneConfig,
 					}
 				} else {
 					urls[i] = &Repository{
 						RepositoryURL: project.SSHURLToRepo,
-						Clone: cloneConfig,
+						Clone:         cloneConfig,
 					}
 				}
 			}
@@ -114,7 +114,7 @@ func (r *gitlabRemote) FetchRepositories(request *FetchRepositoriesRequest) (*Fe
 		logrus.Infof("[remotes.gitlab] fetching projects for group: %s", group)
 
 		page = 1
-		for ; page > 0; {
+		for page > 0 {
 			projects, resp, err := r.client.Groups.ListGroupProjects(group, &gitlab.ListGroupProjectsOptions{
 				ListOptions: gitlab.ListOptions{
 					Page:    page,
@@ -133,12 +133,12 @@ func (r *gitlabRemote) FetchRepositories(request *FetchRepositoriesRequest) (*Fe
 				if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
 					urls[i] = &Repository{
 						RepositoryURL: project.HTTPURLToRepo,
-						Clone: cloneConfig,
+						Clone:         cloneConfig,
 					}
 				} else {
 					urls[i] = &Repository{
 						RepositoryURL: project.SSHURLToRepo,
-						Clone: cloneConfig,
+						Clone:         cloneConfig,
 					}
 				}
 			}
@@ -153,4 +153,3 @@ func (r *gitlabRemote) FetchRepositories(request *FetchRepositoriesRequest) (*Fe
 		Repositories: repositories,
 	}, nil
 }
-
