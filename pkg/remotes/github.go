@@ -55,9 +55,11 @@ type githubRemote struct {
 	client *github.Client
 }
 
-func (r *githubRemote) ListRepositories() ([]string, error) {
+func (r *githubRemote) FetchRepositories(request *FetchRepositoriesRequest) (*FetchRepositoriesResponse, error) {
+	cloneConfig := r.config.GetClone()
+
 	organizations := make([]string, 0)
-	repositories := make([]string, 0)
+	repositories := make([]*Repository, 0)
 
 	if r.config.Organizations != nil {
 		// init with configured orgs
@@ -102,13 +104,19 @@ func (r *githubRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			urls := make([]string, len(repos))
+			urls := make([]*Repository, len(repos))
 
 			for i, repo := range repos {
-				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
-					urls[i] = repo.GetCloneURL()
+				if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
+					urls[i] = &Repository{
+						RepositoryURL: repo.GetCloneURL(),
+						Clone:         cloneConfig,
+					}
 				} else {
-					urls[i] = repo.GetSSHURL()
+					urls[i] = &Repository{
+						RepositoryURL: repo.GetSSHURL(),
+						Clone:         cloneConfig,
+					}
 				}
 			}
 
@@ -133,13 +141,19 @@ func (r *githubRemote) ListRepositories() ([]string, error) {
 				break
 			}
 
-			urls := make([]string, len(orgRepos))
+			urls := make([]*Repository, len(orgRepos))
 
-			for i, orgRepo := range orgRepos {
-				if r.config.GetStrategy() == config.CloneStrategy_HTTP {
-					urls[i] = orgRepo.GetCloneURL()
+			for i, repo := range orgRepos {
+				if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
+					urls[i] = &Repository{
+						RepositoryURL: repo.GetCloneURL(),
+						Clone:         cloneConfig,
+					}
 				} else {
-					urls[i] = orgRepo.GetSSHURL()
+					urls[i] = &Repository{
+						RepositoryURL: repo.GetSSHURL(),
+						Clone:         cloneConfig,
+					}
 				}
 			}
 
@@ -149,5 +163,7 @@ func (r *githubRemote) ListRepositories() ([]string, error) {
 		}
 	}
 
-	return repositories, nil
+	return &FetchRepositoriesResponse{
+		Repositories: repositories,
+	}, nil
 }
