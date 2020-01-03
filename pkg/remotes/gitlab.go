@@ -43,6 +43,13 @@ type gitlabRemote struct {
 func (r *gitlabRemote) FetchRepositories(request *FetchRepositoriesRequest) (*FetchRepositoriesResponse, error) {
 	cloneConfig := r.config.GetClone()
 
+	// if clone config is nil, fall back
+	if cloneConfig == nil {
+		cloneConfig = &config.Clone{
+			Strategy: r.config.GetStrategy(),
+		}
+	}
+
 	repositories := make([]*Repository, 0)
 	groups := make(map[string]bool, 0)
 	for _, group := range r.config.GetGroups() {

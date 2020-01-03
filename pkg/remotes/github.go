@@ -58,6 +58,13 @@ type githubRemote struct {
 func (r *githubRemote) FetchRepositories(request *FetchRepositoriesRequest) (*FetchRepositoriesResponse, error) {
 	cloneConfig := r.config.GetClone()
 
+	// if clone config is nil, fall back
+	if cloneConfig == nil {
+		cloneConfig = &config.Clone{
+			Strategy: r.config.GetStrategy(),
+		}
+	}
+
 	organizations := make([]string, 0)
 	repositories := make([]*Repository, 0)
 

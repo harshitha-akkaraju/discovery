@@ -77,6 +77,13 @@ func (r *bitbucketRemote) FetchRepositories(request *FetchRepositoriesRequest) (
 	allRepos := make([]*Repository, 0)
 	cloneConfig := r.config.GetClone()
 
+	// if clone config is nil, fall back
+	if cloneConfig == nil {
+		cloneConfig = &config.Clone{
+			Strategy: r.config.GetStrategy(),
+		}
+	}
+
 	for _, user := range r.config.Users {
 		logrus.Infof("[remotes.bitbucket] fetching projects for user: %s", user)
 

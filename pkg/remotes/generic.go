@@ -29,6 +29,8 @@ type genericRemote struct {
 }
 
 func (r *genericRemote) FetchRepositories(request *FetchRepositoriesRequest) (*FetchRepositoriesResponse, error) {
+	cloneConfig := r.config.GetClone()
+
 	tokens, err := jee.Lexer(r.config.Selector)
 	if err != nil {
 		return nil, err
@@ -85,7 +87,7 @@ func (r *genericRemote) FetchRepositories(request *FetchRepositoriesRequest) (*F
 			entryString := entry.(string)
 			repositories = append(repositories, &Repository{
 				RepositoryURL: entryString,
-				Clone:         r.config.GetClone(),
+				Clone:         cloneConfig,
 			})
 		}
 
