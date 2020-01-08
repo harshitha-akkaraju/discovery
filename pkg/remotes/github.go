@@ -67,6 +67,48 @@ func (r *githubRemote) FetchRepositories(request *FetchRepositoriesRequest) (*Fe
 
 	organizations := make([]string, 0)
 	repositories := make([]*Repository, 0)
+	authUserRepos := make([]*Repository, 0)
+
+	// processing teams for authenticated user
+	// here I'm taking 'user' to mean a company -- Google for example
+	// since we have the oauth token in the config, we should be able to pull the teams created by Google
+	logrus.Infof("[remotes.github] processing teams for authenticated user")
+	teams, _, err = r.client.Teams.ListUserTeams(context.Background(), nil)
+	if err != nil {
+		logrus.Errorf("[remotes.github] encountered error while retrieving user's teams %v", err)
+		break
+	}
+
+	for _, t := range teams {
+		reposURL := t.GetRepositoriesURL()
+		request, _ := r.client.NewRequest(http.MethodGet, reposURL, nil)
+		repos := make([]*Repository, 0)
+		_, err := r.client.Do(context.Background(), request, &repos)
+		if err != nil {
+			logrus.Errorf("[remotes.github] encountered error while repos from a team %v", err)
+			break
+		}
+		authUserRepos = append(authUserRepos, repos...)
+	}
+
+	// add all the repos from the teams that the auth user is part of
+	for _, repo := range authUserRepos {
+		r := &Repository{}
+		if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
+			r = &Repository{
+				RepositoryURL: repo.GetCloneURL(),
+				Clone:         cloneConfig,
+			}
+		} else {
+			r = &Repository{
+				RepositoryURL: repo.GetSSHURL(),
+				Clone:         cloneConfig,
+			}
+		}
+		repositories = append(repositories, r)
+	}
+
+	// ---------------------------------------------
 
 	if r.config.Organizations != nil {
 		// init with configured orgs
