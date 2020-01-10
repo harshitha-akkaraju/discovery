@@ -2,11 +2,11 @@ package remotes
 
 import (
 	"context"
+	"log"
 	"net/http"
 
 	"github.com/deps-cloud/discovery/pkg/config"
-
-	"github.com/google/go-github/v20/github"
+	"github.com/google/go-github/github"
 
 	"github.com/sirupsen/logrus"
 
@@ -65,25 +65,21 @@ func (r *githubRemote) FetchRepositories(request *FetchRepositoriesRequest) (*Fe
 		}
 	}
 
-	organizations := make([]string, 0)
+	// organizations := make([]string, 0)
 	repositories := make([]*Repository, 0)
-	authUserRepos := make([]*Repository, 0)
+	authUserRepos := make([]*github.Repository, 0)
 
 	// processing teams for authenticated user
 	// here I'm taking 'user' to mean a company -- Google for example
 	// since we have the oauth token in the config, we should be able to pull the teams created by Google
 	logrus.Infof("[remotes.github] processing teams for authenticated user")
-	teams, _, err = r.client.Teams.ListUserTeams(context.Background(), nil)
+	teams, _, err := r.client.Teams.ListUserTeams(context.Background(), nil)
 	if err != nil {
 		logrus.Errorf("[remotes.github] encountered error while retrieving user's teams %v", err)
-		break
 	}
 
 	for _, t := range teams {
-		reposURL := t.GetRepositoriesURL()
-		request, _ := r.client.NewRequest(http.MethodGet, reposURL, nil)
-		repos := make([]*Repository, 0)
-		_, err := r.client.Do(context.Background(), request, &repos)
+		repos, _, err := r.client.Teams.ListTeamRepos(context.Background(), t.GetID(), nil)
 		if err != nil {
 			logrus.Errorf("[remotes.github] encountered error while repos from a team %v", err)
 			break
@@ -108,109 +104,113 @@ func (r *githubRemote) FetchRepositories(request *FetchRepositoriesRequest) (*Fe
 		repositories = append(repositories, r)
 	}
 
+	for _, repo := range repositories {
+		log.Println(repo.RepositoryURL)
+	}
+
 	// ---------------------------------------------
 
-	if r.config.Organizations != nil {
-		// init with configured orgs
-		organizations = append(organizations, r.config.Organizations...)
-	}
+	// if r.config.Organizations != nil {
+	// 	// init with configured orgs
+	// 	organizations = append(organizations, r.config.Organizations...)
+	// }
 
-	// discover more from users
-	for _, user := range r.config.Users {
-		logrus.Infof("[remotes.github] processing organizations for user: %s", user)
+	// // discover more from users
+	// for _, user := range r.config.Users {
+	// 	logrus.Infof("[remotes.github] processing organizations for user: %s", user)
 
-		for orgPage := 1; orgPage != 0; {
-			orgs, response, err := r.client.Organizations.List(context.Background(), user, &github.ListOptions{
-				Page: orgPage,
-			})
+	// 	for orgPage := 1; orgPage != 0; {
+	// 		orgs, response, err := r.client.Organizations.List(context.Background(), user, &github.ListOptions{
+	// 			Page: orgPage,
+	// 		})
 
-			if err != nil {
-				logrus.Errorf("[remotes.github] encountered err on orgPage %d, %v", orgPage, err)
-				break
-			}
+	// 		if err != nil {
+	// 			logrus.Errorf("[remotes.github] encountered err on orgPage %d, %v", orgPage, err)
+	// 			break
+	// 		}
 
-			orgLogins := make([]string, len(orgs))
-			for i, org := range orgs {
-				orgLogins[i] = org.GetLogin()
-			}
+	// 		orgLogins := make([]string, len(orgs))
+	// 		for i, org := range orgs {
+	// 			orgLogins[i] = org.GetLogin()
+	// 		}
 
-			organizations = append(organizations, orgLogins...)
+	// 		organizations = append(organizations, orgLogins...)
 
-			orgPage = response.NextPage
-		}
+	// 		orgPage = response.NextPage
+	// 	}
 
-		logrus.Infof("[remotes.github] processing repositories for user: %s", user)
+	// 	logrus.Infof("[remotes.github] processing repositories for user: %s", user)
 
-		for repoPage := 1; repoPage != 0; {
-			repos, response, err := r.client.Repositories.List(context.Background(), user, &github.RepositoryListOptions{
-				ListOptions: github.ListOptions{
-					Page: repoPage,
-				},
-			})
+	// 	for repoPage := 1; repoPage != 0; {
+	// 		repos, response, err := r.client.Repositories.List(context.Background(), user, &github.RepositoryListOptions{
+	// 			ListOptions: github.ListOptions{
+	// 				Page: repoPage,
+	// 			},
+	// 		})
 
-			if err != nil {
-				logrus.Errorf("[remotes.github] encountered err on repoPage %d, %v", repoPage, err)
-				break
-			}
+	// 		if err != nil {
+	// 			logrus.Errorf("[remotes.github] encountered err on repoPage %d, %v", repoPage, err)
+	// 			break
+	// 		}
 
-			urls := make([]*Repository, len(repos))
+	// 		urls := make([]*Repository, len(repos))
 
-			for i, repo := range repos {
-				if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
-					urls[i] = &Repository{
-						RepositoryURL: repo.GetCloneURL(),
-						Clone:         cloneConfig,
-					}
-				} else {
-					urls[i] = &Repository{
-						RepositoryURL: repo.GetSSHURL(),
-						Clone:         cloneConfig,
-					}
-				}
-			}
+	// 		for i, repo := range repos {
+	// 			if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
+	// 				urls[i] = &Repository{
+	// 					RepositoryURL: repo.GetCloneURL(),
+	// 					Clone:         cloneConfig,
+	// 				}
+	// 			} else {
+	// 				urls[i] = &Repository{
+	// 					RepositoryURL: repo.GetSSHURL(),
+	// 					Clone:         cloneConfig,
+	// 				}
+	// 			}
+	// 		}
 
-			repositories = append(repositories, urls...)
+	// 		repositories = append(repositories, urls...)
 
-			repoPage = response.NextPage
-		}
-	}
+	// 		repoPage = response.NextPage
+	// 	}
+	// }
 
-	for _, organization := range organizations {
-		logrus.Infof("[remotes.github] processing repositories for organization: %s", organization)
+	// for _, organization := range organizations {
+	// 	logrus.Infof("[remotes.github] processing repositories for organization: %s", organization)
 
-		for orgRepoPage := 1; orgRepoPage != 0; {
-			orgRepos, response, err := r.client.Repositories.ListByOrg(context.Background(), organization, &github.RepositoryListByOrgOptions{
-				ListOptions: github.ListOptions{
-					Page: orgRepoPage,
-				},
-			})
+	// 	for orgRepoPage := 1; orgRepoPage != 0; {
+	// 		orgRepos, response, err := r.client.Repositories.ListByOrg(context.Background(), organization, &github.RepositoryListByOrgOptions{
+	// 			ListOptions: github.ListOptions{
+	// 				Page: orgRepoPage,
+	// 			},
+	// 		})
 
-			if err != nil {
-				logrus.Errorf("[remotes.github] encountered err on orgRepoPage %d, %v", orgRepoPage, err)
-				break
-			}
+	// 		if err != nil {
+	// 			logrus.Errorf("[remotes.github] encountered err on orgRepoPage %d, %v", orgRepoPage, err)
+	// 			break
+	// 		}
 
-			urls := make([]*Repository, len(orgRepos))
+	// 		urls := make([]*Repository, len(orgRepos))
 
-			for i, repo := range orgRepos {
-				if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
-					urls[i] = &Repository{
-						RepositoryURL: repo.GetCloneURL(),
-						Clone:         cloneConfig,
-					}
-				} else {
-					urls[i] = &Repository{
-						RepositoryURL: repo.GetSSHURL(),
-						Clone:         cloneConfig,
-					}
-				}
-			}
+	// 		for i, repo := range orgRepos {
+	// 			if cloneConfig.GetStrategy() == config.CloneStrategy_HTTP {
+	// 				urls[i] = &Repository{
+	// 					RepositoryURL: repo.GetCloneURL(),
+	// 					Clone:         cloneConfig,
+	// 				}
+	// 			} else {
+	// 				urls[i] = &Repository{
+	// 					RepositoryURL: repo.GetSSHURL(),
+	// 					Clone:         cloneConfig,
+	// 				}
+	// 			}
+	// 		}
 
-			repositories = append(repositories, urls...)
+	// 		repositories = append(repositories, urls...)
 
-			orgRepoPage = response.NextPage
-		}
-	}
+	// 		orgRepoPage = response.NextPage
+	// 	}
+	// }
 
 	return &FetchRepositoriesResponse{
 		Repositories: repositories,
