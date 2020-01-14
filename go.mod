@@ -5,7 +5,7 @@ require (
 	github.com/ghodss/yaml v1.0.0
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/protobuf v1.3.2
-	replace github.com/google/go-github/v20 v20.0.0 => github.com/google/go-github 
+	github.com/google/go-github/v20 v20.0.0
 	github.com/grpc-ecosystem/grpc-gateway v1.12.1
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/kr/pretty v0.1.0 // indirect
